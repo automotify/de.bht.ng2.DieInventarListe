@@ -1,0 +1,1 @@
+# de.bht.ng2.DieInventarListe
