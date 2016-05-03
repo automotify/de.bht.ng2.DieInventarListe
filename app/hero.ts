@@ -13,7 +13,7 @@ export class Hero {
      * @param name
      * @param age
      */
-    constructor(id: number, name: string, age: number) {
+    constructor( name: string, age: number) {
         this.name   = name;
         this.age    = age;
         this.health = 100; // Health is at 100 (%) upon initialisation

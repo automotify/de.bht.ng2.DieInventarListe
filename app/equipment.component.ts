@@ -1,9 +1,10 @@
-import {Component} from "angular2/core";
-import {Equipment} from "./equipment";
-import {Hero} from "./hero";
 /**
  * Created by Andreas Burger on 03.05.2016.
  */
+
+import {Component}  from "angular2/core";
+import {Equipment}  from "./equipment";
+import {Hero}       from "./hero";
 
 @Component({
     selector: 'my-equipment',
@@ -11,6 +12,10 @@ import {Hero} from "./hero";
 })
 
 export class EquipmentComponent{
-    hero = Hero;
-    equipment = Equipment;
+    private hero : Hero;
+    private equipment : Equipment;
+
+    constructor(){
+
+    }
 }

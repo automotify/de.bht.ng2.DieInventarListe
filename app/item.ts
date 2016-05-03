@@ -3,18 +3,26 @@
  * Created by Andreas Burger on 03.05.2016.
  */
 export class Item{
-    private id_item: number;
-    private name: string;
-    private type: string;
-    private item_value_name: string;
-    private item_value: number;
+    public id       : number;
+    public name          : string;
+    public type          : string;
+    public itemValueName : string;
+    public itemValue     : number;
 
-
-    constructor(id_item:number, name:string, type:string, item_value_name:string, item_value:number) {
-        this.id_item = id_item;
-        this.name = name;
-        this.type = type;
-        this.item_value_name = item_value_name;
-        this.item_value = item_value;
+    /**
+     * Constructor for Item instances
+     *
+     * @param id         of type number (ID of the item)
+     * @param name            of type string (name of the item)
+     * @param type            of type string (categorization of the item)
+     * @param itemValueName   of type string (shows what value the item_value is of)
+     * @param itemValue       of type number (numeric value)
+     */
+    constructor( id : number, name : string, type : string, itemValueName : string, itemValue : number ) {
+        this.id            = id;
+        this.name          = name;
+        this.type          = type;
+        this.itemValueName = itemValueName;
+        this.itemValue     = itemValue;
     }
 }
