@@ -9,14 +9,9 @@ import {Item} from "./item";
 
 @Component({
     selector: 'my-bag',
-    template: `<div>
-        <h2>Unselected Items! - bag</h2>
-        
-    </div>`
+    template: `<h2>Unselected Items! - bag</h2>`
 })
 
 export class Bag {
-    private id_bag :number;
     private items  :Item[];
-
 }

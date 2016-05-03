@@ -1,4 +1,5 @@
 /**
+ * Item represent a thing which is in equipment or in bag
  * Created by Andreas Burger on 03.05.2016.
  */
 export class Item{
