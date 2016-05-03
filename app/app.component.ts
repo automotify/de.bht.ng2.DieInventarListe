@@ -3,7 +3,7 @@
  * @author Andreas Burger
  */
 import {Component} from 'angular2/core';
-import {Bag} from './bag';
+import {Bag} from './bag.component';
 
 @Component({
     selector: 'inventarlist-app',
