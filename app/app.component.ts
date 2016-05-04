@@ -6,11 +6,13 @@ import {Component}          from 'angular2/core';
 import {BagComponent}       from './bag.component';
 import {EquipmentComponent} from "./equipment.component";
 
+
 @Component({
     selector: 'inventarlist-app',
     template: `<h1>{{name}}</h1>
                <my-bag></my-bag>
-               <my-equipment></my-equipment>`,
+               <my-equipment></my-equipment>
+               `,
     directives: [BagComponent, EquipmentComponent]
 })
 
