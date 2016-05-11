@@ -3,7 +3,7 @@
  *
  * @author András Bucsi
  */
-import {Component, Input} from 'angular2/core';
+import {Component, Input} from '../../node_modules/angular2/core.d';
 import {Item} from './item';
 
 @Component({

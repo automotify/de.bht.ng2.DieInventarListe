@@ -2,9 +2,9 @@
  * Created by Andreas Burger on 03.05.2016.
  */
 
-import {Component}  from "angular2/core";
+import {Component}  from "../../node_modules/angular2/core.d";
 import {Equipment}  from "./equipment";
-import {Hero}       from "./hero";
+import {Hero}       from "./../hero/hero";
 
 @Component({
     selector: 'my-equipment',

@@ -3,8 +3,8 @@
  * @author Andreas Burger
  */
 import {Component}          from 'angular2/core';
-import {BagComponent}       from './bag.component';
-import {EquipmentComponent} from "./equipment.component";
+import {BagComponent}       from './bag/bag.component.ts';
+import {EquipmentComponent} from "./equipment/equipment.component.ts";
 
 
 @Component({

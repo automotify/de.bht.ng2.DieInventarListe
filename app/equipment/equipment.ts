@@ -4,7 +4,7 @@
  * Created by Andreas Burger on 03.05.2016.
  */
 
-import {Item} from "./item";
+import {Item} from "./../item/item";
 
 export class Equipment {
     private id_equipment: number;

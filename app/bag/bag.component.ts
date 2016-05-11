@@ -5,9 +5,8 @@
  */
 
 import {Component}  from "angular2/core";
-import {Bag}        from "./bag";
-import {Item}       from "./item";
-import {ItemDetailComponent}       from "./item-detail.component";
+import {Bag}        from "../bag/bag";
+import {Item, ItemDetailComponent} from "../item";
 
 
 @Component({
