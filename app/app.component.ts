@@ -3,8 +3,7 @@
  * @author Andreas Burger
  */
 import {Component}          from 'angular2/core';
-import {Hero}               from "./hero/index";
-import {HeroComponent}      from "./hero/index";
+import {Hero, HeroComponent}from "./hero/index";
 import {BagComponent}       from './bag/index';
 import {EquipmentComponent} from "./equipment/index";
 

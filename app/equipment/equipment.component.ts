@@ -3,8 +3,8 @@
  */
 
 import {Component}  from "angular2/core";
-import {Equipment}  from "./equipment";
-import {Hero}       from "../hero/hero";
+import {Equipment}  from "./equipment.model";
+import {Hero}       from "../hero/hero.model";
 
 @Component({
     selector: 'my-equipment',

@@ -1,4 +1,3 @@
-
 /**
  * Shows all stuff which is equipted and so not in the bag.
  * Created by Andreas Burger on 03.05.2016.
