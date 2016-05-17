@@ -3,17 +3,19 @@
  * @author Andreas Burger
  */
 import {Component}          from 'angular2/core';
-import {BagComponent}       from './bag/bag.component.ts';
-import {EquipmentComponent} from "./equipment/equipment.component.ts";
-
+import {Hero}               from "./hero/index";
+import {HeroComponent}      from "./hero/index";
+import {BagComponent}       from './bag/index';
+import {EquipmentComponent} from "./equipment/index";
 
 @Component({
     selector: 'inventarlist-app',
     template: `<h1>{{name}}</h1>
+               <hero-tag></hero-tag>
                <my-bag></my-bag>
                <my-equipment></my-equipment>
                `,
-    directives: [BagComponent, EquipmentComponent]
+    directives: [BagComponent, EquipmentComponent, HeroComponent]
 })
 
 export class AppComponent {

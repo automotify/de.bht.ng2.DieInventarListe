@@ -1,7 +1,7 @@
 /**
  * Bag Class for Bag Component
  */
-import {Item} from '../item';
+import {Item} from '../item/index';
 
 export class Bag{
     private size    : number;

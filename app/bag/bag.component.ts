@@ -6,7 +6,7 @@
 
 import {Component}  from "angular2/core";
 import {Bag}        from "../bag/bag";
-import {Item, ItemDetailComponent} from "../item";
+import {Item, ItemDetailComponent} from "../item/index";
 
 
 @Component({
