@@ -1,13 +1,9 @@
-<<<<<<< HEAD
 /**
  * Hero-List representation
  *
  * @author András Bucsi, Daniel Schleußner, Andreas Burger
  */
 import {Hero} from './index';
-=======
-import {Hero} from './hero.model';
->>>>>>> de7fff6b259fc4dbaa43d7dd50eabfbbcf1c161d
 
 export class HeroList {
     private size: number;
