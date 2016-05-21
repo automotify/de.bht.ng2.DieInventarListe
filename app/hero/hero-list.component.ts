@@ -1,14 +1,6 @@
-<<<<<<< HEAD
 import {Component}                           from 'angular2/core';
 import {Hero, HeroList, HeroDetailComponent} from './index';
 import {BagComponent}                        from '../bag/index';
-=======
-import {Component}              from 'angular2/core';
-import {Hero}                   from './hero.model';
-import {HeroList}               from './hero-list.model';
-import {HeroDetailComponent}    from './hero-detail.component';
-import {BagComponent}           from '../bag/index';
->>>>>>> de7fff6b259fc4dbaa43d7dd50eabfbbcf1c161d
 
 @Component({
     selector: 'hero-list',
