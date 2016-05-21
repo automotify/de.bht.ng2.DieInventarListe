@@ -5,7 +5,7 @@
  */
 
 import {Component, Input} from "angular2/core"
-import {Bag} from "./bag"
+import {Bag} from "./bag.model"
 import {Item, Weapon, Gear, ItemDetailComponent} from "../item/index";
 import {Hero} from "../hero/index";
 
