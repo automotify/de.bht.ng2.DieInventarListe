@@ -2,8 +2,12 @@
  * Shows all stuff which is equipted and so not in the bag.
  * Created by Andreas Burger on 03.05.2016.
  */
+<<<<<<< Updated upstream
 
 import {Item} from "./../item/item";
+=======
+import {Item} from "../item/index";
+>>>>>>> Stashed changes
 
 export class Equipment {
     private id_equipment: number;

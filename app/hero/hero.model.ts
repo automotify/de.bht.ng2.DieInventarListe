@@ -1,8 +1,14 @@
 /**
  * Hero representation
  *
+<<<<<<< Updated upstream
  * @author András Bucsi
+=======
+ * @author András Bucsi, Daniel Schleußner, Andreas Burger
+>>>>>>> Stashed changes
  */
+import {Bag} from "../bag/index";
+
 export class Hero {
     private id     :number;
     private name   :string;

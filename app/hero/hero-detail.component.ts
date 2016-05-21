@@ -3,8 +3,13 @@
  *
  * @author András Bucsi
  */
+<<<<<<< Updated upstream
 import {Component, Input} from 'angular2/core';
 import {Hero} from './hero.model';
+=======
+import {Component, Input}   from 'angular2/core';
+import {Hero}               from './index';
+>>>>>>> Stashed changes
 
 @Component({
     selector: 'hero-detail',

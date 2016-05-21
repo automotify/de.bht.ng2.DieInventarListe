@@ -4,7 +4,7 @@
 
 import {Component}  from "angular2/core";
 import {Equipment}  from "./equipment.model";
-import {Hero}       from "../hero/hero.model";
+import {Hero}       from "../hero/index";
 
 @Component({
     selector: 'my-equipment',

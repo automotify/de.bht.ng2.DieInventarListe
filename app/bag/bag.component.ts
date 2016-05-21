@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 /**
  * Hero´s bag for the detailed view
  *
@@ -8,6 +9,12 @@ import {Component}  from "angular2/core";
 import {Bag}        from "../bag/bag";
 import {Item, ItemDetailComponent} from "../item/index";
 
+=======
+import {Component, Input} from "angular2/core"
+import {Bag} from "./bag.model"
+import {Item, Weapon, Gear, ItemDetailComponent} from "../item/index";
+import {Hero} from "../hero/index";
+>>>>>>> Stashed changes
 
 @Component({
     selector: 'my-bag',
