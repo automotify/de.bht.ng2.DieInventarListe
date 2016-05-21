@@ -2,31 +2,28 @@
  * Shows all stuff which is equipted and so not in the bag.
  * Created by Andreas Burger on 03.05.2016.
  */
-
-import {Item} from "./../item/item";
+import {Item} from "./../item/item.model";
 
 export class Equipment {
-    private id_equipment: number;
-    private helmet      : Item;
-    private shoulder    : Item;
-    private chest       : Item;
-    private hands       : Item;
-    private legs        : Item;
-    private feet        : Item;
-    private weapon1     : Item;
-    private weapon2     : Item;
+    private equip = Item[7];
 
+    //equip[0] = helmet ;
+    private helmet      :Item;
+    private shoulders   :Item;
+    private legs        :Item;
+    private chest       :Item;
+    private boots       :Item;
+    private weapon      :Item;
+    private offhand     :Item;
 
-    constructor( id_equipment :number, helmet:Item, shoulder:Item, chest:Item,
-                 hands:Item, legs:Item, feet:Item, weapon1:Item, weapon2:Item) {
-        this.id_equipment   = id_equipment;
-        this.helmet         = helmet;
-        this.shoulder       = shoulder;
-        this.chest          = chest;
-        this.hands          = hands;
-        this.legs           = legs;
-        this.feet           = feet;
-        this.weapon1        = weapon1;
-        this.weapon2        = weapon2;
+    constructor(helmet?:Item, shoulders?:Item, legs?:Item, chest?:Item, boots?:Item, weapon?:Item, offhand?:Item) {
+        this.helmet     = helmet    || null;
+        this.shoulders  = shoulders || null;
+        this.legs       = legs      || null;
+        this.chest      = chest     || null;
+        this.boots      = boots     || null;
+        this.weapon     = weapon    || null;
+        this.offhand    = offhand   || null;
     }
+
 }
