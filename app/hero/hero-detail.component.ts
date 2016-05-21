@@ -4,7 +4,7 @@
  * @author András Bucsi, Daniel Schleußner
  */
 import {Component, Input}   from 'angular2/core';
-import {Hero}               from './index';
+import {Hero}               from './hero.model';
 
 @Component({
     selector: 'hero-detail',

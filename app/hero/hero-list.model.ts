@@ -3,7 +3,7 @@
  *
  * @author András Bucsi, Daniel Schleußner, Andreas Burger
  */
-import {Hero} from './index';
+import {Hero} from './hero.model';
 
 export class HeroList {
     private size: number;

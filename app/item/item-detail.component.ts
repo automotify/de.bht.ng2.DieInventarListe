@@ -4,7 +4,7 @@
  * @author András Bucsi
  */
 import {Component, Input} from 'angular2/core';
-import {Item} from './item.model';
+import {Item}             from './item.model';
 
 @Component({
     selector: 'item-detail',
