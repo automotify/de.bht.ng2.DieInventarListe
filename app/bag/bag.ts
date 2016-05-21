@@ -6,6 +6,7 @@ import {Item} from '../item/index';
 export class Bag{
     private size    : number;
     public itemList: Item[];
+    public currentItemId : number = 0;
 
     constructor( size:number ){
         this.size     = size;
@@ -20,6 +21,8 @@ export class Bag{
      */
     public addItem( item:Item ){
         if( this.itemList.length < this.size ) {
+            this.currentItemId++;
+            item.id = this.currentItemId;
             this.itemList.push(item);
         } else {
             console.log('List full. '+item+' could not be added to itemList\n'+this.itemList);
