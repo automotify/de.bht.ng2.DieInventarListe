@@ -1,30 +1,33 @@
+import {Bag} from "../bag/index";
 /**
  * Hero representation
  *
+<<<<<<< HEAD
 <<<<<<< Updated upstream
  * @author András Bucsi
 =======
  * @author András Bucsi, Daniel Schleußner, Andreas Burger
 >>>>>>> Stashed changes
+=======
+ * @author András Bucsi, Daniel Schleußner
+>>>>>>> de7fff6b259fc4dbaa43d7dd50eabfbbcf1c161d
  */
 import {Bag} from "../bag/index";
 
 export class Hero {
-    private id     :number;
-    private name   :string;
-    private age    :number;
-    private health :number;
+    public id     :number;
+    private name  :string;
+    private level :number;
+    public bag    :Bag;
 
     /**
      * Constructor
-     * @param id
      * @param name
-     * @param age
+     * @param level
      */
-    constructor( id:number, name: string, age: number) {
-        this.id     = id;
+    constructor( name: string, level: number) {
         this.name   = name;
-        this.age    = age;
-        this.health = 100; // Health is at 100 (%) upon initialisation
+        this.level  = level;
+        this.bag    = new Bag(100);
     }
 }

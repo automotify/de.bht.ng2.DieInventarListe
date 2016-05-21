@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 /**
  * Hero´s bag for the detailed view
@@ -15,38 +16,60 @@ import {Bag} from "./bag.model"
 import {Item, Weapon, Gear, ItemDetailComponent} from "../item/index";
 import {Hero} from "../hero/index";
 >>>>>>> Stashed changes
+=======
+import {Component, Input} from "angular2/core"
+import {Bag} from "./bag"
+import {Item, Weapon, Gear, ItemDetailComponent} from "../item/index";
+import {Hero} from "../hero/index";
+>>>>>>> de7fff6b259fc4dbaa43d7dd50eabfbbcf1c161d
 
 @Component({
-    selector: 'my-bag',
-    template: `<h2>Unselected Items! - bag</h2>
-                <ul class="items">
-                    <li *ngFor="#item of bag.itemList"  [class.selected]="item === selectedItem" (click)="onSelect(item)" class="items">
+    selector: 'heros-bag',
+    template: `<div class="bag">
+                    <ul class="items">
+                        <label class="badge">Create a new item</label>
+                        <form >
+                            <!--<label>
+                              <input [(ngModel)]="newItem.name" placeholder="name"></label>
+                            <label for="type">type:
+                                <select id="type">
+                                    <option>gear</option>
+                                    <option>weapon</option>
+                                </select>
+                               </label>
+                            <br>-->
+                            <button type="button" (click)="createANewItem()">do it!</button>
+                        </form>
+                    </ul>
+                    <ul class="items">
+                       <h2>{{hero.name}}'s bag</h2>
+                        <li *ngFor="#item of hero.bag.itemList" [class.selected]="item === selectedItem" (click)="onSelect(item)" class="item">
                         <label class="badge">{{item.id}}</label> {{item.name}}
-                    </li>
-                </ul>
-                <item-detail *ngIf="selectedItem" [item]="selectedItem"></item-detail>
-    `,
+                        </li>
+                        <item-detail *ngIf="selectedItem && bag == hero.bag" [item]="selectedItem"></item-detail>
+                    </ul>
+               </div>`,
     directives: [ItemDetailComponent]
 })
 
 export class BagComponent {
-    private bag  :Bag;
-    private selectedItem: Item;
+    private bag             : Bag;
+    @Input()
+    private hero            : Hero;
+    private selectedItem    : Item;
+    //private newItem         : Item;
 
-    /**
-     * Constructor with sample bag and sample items added to it as dummys
-     */
-    constructor(){
-        this.bag = new Bag(5);
-        this.bag.addItem(new Item(1,'swordA','hand','coin',50));
-        this.bag.addItem(new Item(2,'swordB','hand','coin',50));
-        this.bag.addItem(new Item(3,'swordC','hand','coin',50));
-        this.bag.addItem(new Item(4,'swordD','hand','coin',50));
-        this.bag.addItem(new Item(5,'swordE','hand','coin',50));
-        this.bag.addItem(new Item(6,'swordF','hand','coin',50)); // in console view, it shows that it wasnt added to the bag.itemList
+    constructor() {
     }
 
-    private onSelect(item:Item){
+    private onSelect(item: Item) {
         this.selectedItem = item;
+        this.bag = this.hero.bag;
+    }
+
+    private createANewItem() {
+        console.log("new Item");
+        this.hero.bag.addItem(new Weapon("Excalibur", "onehand", 200));
+        this.hero.bag.addItem(new Gear("Basecap", "helmet", 25));
     }
 }
