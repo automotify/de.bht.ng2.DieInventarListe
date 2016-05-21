@@ -3,18 +3,8 @@
  *
  * @author András Bucsi, Daniel Schleußner
  */
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-import {Component, Input} from 'angular2/core';
-import {Hero} from './hero.model';
-=======
 import {Component, Input}   from 'angular2/core';
 import {Hero}               from './index';
->>>>>>> Stashed changes
-=======
-import {Component, Input}   from 'angular2/core';
-import {Hero}               from './hero.model';
->>>>>>> de7fff6b259fc4dbaa43d7dd50eabfbbcf1c161d
 
 @Component({
     selector: 'hero-detail',
