@@ -29,7 +29,7 @@ import {Hero} from "../hero/index";
                     </ul>
                     <ul class="items">
                        <h2>{{hero.name}}'s bag</h2>
-                        <li *ngFor="#item of hero.bag.itemList" [class.selected]="item === selectedItem" (click)="onSelect(item)" class="item">
+                        <li *ngFor="let item of hero.bag.itemList" [class.selected]="item === selectedItem" (click)="onSelect(item)" class="item">
                         <label class="badge">{{item.id}}</label> {{item.name}}
                         </li>
                         <item-detail *ngIf="selectedItem && bag == hero.bag" [item]="selectedItem"></item-detail>

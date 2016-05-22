@@ -6,9 +6,9 @@ import {BagComponent}        from '../bag/index';
 
 @Component({
     selector: 'hero-list',
-    template: `<h1>Heros</h1>
+    template: `<h1>Heroes</h1>
                 <ul class="items">
-                    <li *ngFor="#hero of heroes.heroList"  [class.selected]="hero === selectedHero" (click)="onSelect(hero)" class="items">
+                    <li *ngFor="let hero of heroes.heroList"  [class.selected]="hero === selectedHero" (click)="onSelect(hero)" class="items">
                         <label class="badge">{{hero.level}}</label> {{hero.name}}
                     </li>
                 </ul>
