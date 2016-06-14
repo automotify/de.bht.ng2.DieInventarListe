@@ -21,14 +21,18 @@ import {Item}             from './item.model';
                                 <ul class="items">
                                     <li class="item"><span class="badge">ID</span>   {{item.id}}</li>
                                     <li class="item"><span class="badge">Name</span> <input [(ngModel)]="item.name" placeholder="name"></li>
-                                    <li class="item"><span class="badge">Type</span> <input [(ngModel)]="item.type" placeholder="type"></li>
+                                    <!--<li class="item"><span class="badge">Type</span> <input [(ngModel)]="item.type" placeholder="type"></li>-->
+                                    <li class="item"><span class="badge">Type</span> 
+                                        <select [(ngModel)]="item.type" (ngModelChange)="whichType(item.type)">
+                                            <option *ngFor="let typen of types">{{typen}}</option>
+                                        </select>
                                     </ul>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <li *ngIf="item.type == 'weapon'" class="item"><span class="badge">Weapontype</span> {{item.weaponType}}</li>
+                            <li *ngIf="item.type == 'weapon'" class="item"><span class="badge">Weapontype</span> {{item.type}}</li>
                             <li *ngIf="item.type == 'weapon'" class="item"><span class="badge">Weapondamagevalue</span> {{item.weaponDamageValue}}</li>
-                            <li *ngIf="item.type == 'gear'" class="item"><span class="badge">Geartype</span> {{item.gearType}}</li>
+                            <li *ngIf="item.type == 'gear'" class="item"><span class="badge">Geartype</span> {{item.type}}</li>
                             <li *ngIf="item.type == 'gear'" class="item"><span class="badge">Geardefensevalue</span> {{item.gearDefenseValue}}</li>
                         </div>
                     </div>
@@ -40,6 +44,12 @@ export class ItemDetailComponent {
     private item:Item;
     @Output()
     private modal = new EventEmitter();
+
+    public types = ["helmet", "shoulders", "legs", "chest", "boots", "weapon", "offhand"];
+    
+    whichType(type: string){
+        console.log(type);
+    }
 
     constructor() {
     }

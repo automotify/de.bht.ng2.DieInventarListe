@@ -7,7 +7,7 @@ import {HeroDetailComponent} from './hero-detail.component';
     selector: 'hero-list',
     template: `<h1>Heros</h1>
                 <ul class="items">
-                    <li *ngFor="#hero of heroList.heroList"  [class.selected]="hero === selectedHero" (click)="onSelect(hero)" class="items">
+                    <li *ngFor="let hero of heroList.heroList"  [class.selected]="hero === selectedHero" (click)="onSelect(hero)" class="items">
                         <label class="badge">{{hero.level}}</label> {{hero.name}}
                     </li>
                 </ul>

@@ -5,6 +5,7 @@
 import {Component, Input, Output, EventEmitter} from 'angular2/core'
 import {Hero} from "./hero.model"
 import {BagComponent} from "../bag/bag.component";
+import {EquipmentComponent} from "../equipment/equipment.component";
 
 @Component({
     selector: 'hero-detail',
@@ -14,7 +15,7 @@ import {BagComponent} from "../bag/bag.component";
                     <div class="modal-content">
                         <div class="modal-header">
                             <span class="close" (click)="modal.emit()">X</span>
-                            <h2>{{hero.name}}</h2>
+                            <div class="modal-title">{{hero.name}}</div>
                         </div>
                         <div class="modal-body">
                             <div class="hero-detail">
@@ -23,7 +24,7 @@ import {BagComponent} from "../bag/bag.component";
                                     <li class="item"><span class="badge">Name</span>       <input [(ngModel)]="hero.name" placeholder="name"></li>
                                     <li class="item"><span class="badge">Level</span>      {{hero.level}}</li>
                                 </ul>
-                                <span>HERO</span>
+                                <my-equipment [hero]="hero"></my-equipment>
                                 <div class="hero-img" [ngSwitch]="hero.name">
                                       <template [ngSwitchWhen]="'Van Helsing'"><img src="http://www.renders-graphiques.fr/image/upload/normal/van_helsing1.png" width="200"></template>
                                       <template [ngSwitchWhen]="'Super Mario'"><img src="https://upload.wikimedia.org/wikipedia/en/9/99/MarioSMBW.png"></template>
@@ -37,7 +38,7 @@ import {BagComponent} from "../bag/bag.component";
                         </div>
                     </div>
                 </div>`,
-    directives: [BagComponent]
+    directives: [BagComponent, EquipmentComponent]
 })
 
 export class HeroDetailComponent {
