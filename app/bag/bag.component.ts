@@ -35,14 +35,14 @@ import {ControlGroup, FormBuilder, Validators, AbstractControl} from "angular2/c
                     <ul class="items">
                        <h2>{{hero.name}}'s bag</h2>
                         <li 
-                                *ngFor="#item of hero.bag.itemList" 
+                                *ngFor="let item of hero.bag.itemList" 
                                 [class.selected]="item === selectedItem" 
                                 (click)="onSelect(item)"
                             >
                             <label class="badge">{{item.id}}</label> {{item.name}}
                         </li>
                         <item-detail 
-                            *ngIf="selectedItem && bag == hero.bag" 
+                            *ngIf="selectedItem" 
                             [item]="selectedItem" 
                             (modal)="notSelected($event)">
                         </item-detail>
@@ -71,11 +71,15 @@ export class BagComponent {
     }
 
     private onSelect(item: Item) {
+        console.log("hallo")
+        console.log(item)
         this.selectedItem = item;
+        console.log(this.selectedItem)
         this.bag = this.hero.bag;
     }
 
     private notSelected() {
+        console.log("not selected..")
         this.selectedItem = null;
     }
 
@@ -83,9 +87,14 @@ export class BagComponent {
         //console.log(value);
         //console.log(this.name);
         this.name.updateValueAndValidity('');
+        //console.log("vor der Erstellung");
         if(value["type"] == 'gear'){
+            //console.log("vor der Erstellung (gear)");
+            console.log(new Gear(value["name"], "helmet", 25))
             this.hero.bag.addItem(new Gear(value["name"], "helmet", 25));
         } else {
+            //console.log("vor der Erstellung (waffe)");
+            console.log(new Weapon(value["name"], "onehand", 200))
             this.hero.bag.addItem(new Weapon(value["name"], "onehand", 200));
         }
     }

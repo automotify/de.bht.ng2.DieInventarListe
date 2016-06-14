@@ -26,13 +26,14 @@ import {Item}             from './item.model';
                                         <select [(ngModel)]="item.type" (ngModelChange)="whichType(item.type)">
                                             <option *ngFor="let typen of types">{{typen}}</option>
                                         </select>
-                                    </ul>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <li *ngIf="item.type == 'weapon'" class="item"><span class="badge">Weapontype</span> {{item.type}}</li>
+                            <li *ngIf="item.type == 'weapon'" class="item"><span class="badge">Weapontype</span> {{item.weaponType}}</li>
                             <li *ngIf="item.type == 'weapon'" class="item"><span class="badge">Weapondamagevalue</span> {{item.weaponDamageValue}}</li>
-                            <li *ngIf="item.type == 'gear'" class="item"><span class="badge">Geartype</span> {{item.type}}</li>
+                            <li *ngIf="item.type == 'gear'" class="item"><span class="badge">Geartype</span> {{item.gearCategory}}</li>
                             <li *ngIf="item.type == 'gear'" class="item"><span class="badge">Geardefensevalue</span> {{item.gearDefenseValue}}</li>
                         </div>
                     </div>

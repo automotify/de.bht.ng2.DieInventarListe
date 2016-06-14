@@ -1,7 +1,3 @@
-/**
- * Created by padawan on 12.05.16.
- */
-
 import {Component, Input, Output, EventEmitter} from 'angular2/core'
 import {Hero} from "./hero.model"
 import {BagComponent} from "../bag/bag.component";

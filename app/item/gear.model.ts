@@ -4,12 +4,12 @@
 import {Item} from "./item.model"
 
 export class Gear extends Item {
-    //gearType:string;
+    gearCategory:string;
     gearDefenseValue:number;
 
-    constructor(name: string, type:string, gearDefenseValue:number) {
-        super(name, type);
-        //this.gearType = gearType;
+    constructor(name: string, gearCat:string, gearDefenseValue:number) {
+        super("gear", name);
+        this.gearCategory = gearCat;
         this.gearDefenseValue = gearDefenseValue;
     }
 }

@@ -6,17 +6,15 @@
 import {Hero} from './hero.model';
 
 export class HeroList {
-    private size: number;
     public heroList: Hero[];
     private currentHeroId: number = 0;
 
-    constructor(size: number) {
-        this.size = size;
+    constructor() {
         this.heroList = [];
     }
 
     public addHero( hero:Hero ){
-        if( this.heroList.length < this.size ) {
+        if( this.heroList.length < 10 ) {
             this.currentHeroId++;
             hero.id = this.currentHeroId;
             this.heroList.push(hero);
@@ -27,7 +25,7 @@ export class HeroList {
     }
 
     public removeHero( hero:Hero ){
-        if( this.heroList.length < this.size ) {
+        if( this.heroList.length < 10 ) {
             let index:number = this.heroList.indexOf(hero,0);
             if( index > -1 ){
                 this.heroList.splice(index,1)

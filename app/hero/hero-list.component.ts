@@ -2,6 +2,8 @@ import {Component}           from 'angular2/core';
 import {Hero}                from './hero.model';
 import {HeroList}            from './hero-list.model';
 import {HeroDetailComponent} from './hero-detail.component';
+import {HeroService} from "./hero.service"
+import {heroList} from "./mock-heroes";
 
 @Component({
     selector: 'hero-list',
@@ -17,19 +19,24 @@ import {HeroDetailComponent} from './hero-detail.component';
                     </hero-detail>
                 </div>
     `,
-    directives: [HeroDetailComponent]
+    directives: [HeroDetailComponent],
+    providers: [HeroService]
 })
 
 export class HeroListComponent {
     private heroList: HeroList;
     private selectedHero: Hero;
 
-    constructor() {
-        this.heroList = new HeroList(3);
-        this.heroList.addHero(new Hero("Van Helsing", 80));
-        this.heroList.addHero(new Hero("Super Mario", 150));
-        this.heroList.addHero(new Hero("Hulk", 999));
-        this.heroList.addHero(new Hero("Son Goku", 700))
+    constructor(private heroService : HeroService) {
+    }
+
+    getHeroes(){
+        this.heroList = new HeroList();
+        this.heroService.getHeroes().then(heroList => this.heroList = heroList);
+    }
+
+    ngOnInit(){
+        this.getHeroes()
     }
 
     private onSelect(hero: Hero) {
