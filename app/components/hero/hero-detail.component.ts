@@ -19,7 +19,7 @@ import { BagComponent } from "../item/bag.component";
                             <li class="item"><span class="badge">Image</span>      <input [(ngModel)]="hero._imgURL" placeholder="image url"></li>
                         </ul>
                         <!--<my-equipment [hero]="hero"></my-equipment>-->
-                        <!--<heros-bag [hero]="hero"></heros-bag>-->
+                        <heros-bag [hero]="hero"></heros-bag>
                         <div class="hero-img" >
                             <img src={{hero._imgURL}} width="200" >
                         </div>
@@ -39,6 +39,7 @@ export class HeroDetailComponent implements OnInit {
     /**
      * create the services
      * @param router
+     * @param routeParams
      * @param heroService
      */
     constructor(private router:Router,

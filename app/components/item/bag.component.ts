@@ -16,37 +16,44 @@ import {NewItemComponent} from "./new-item.component";
     template: `<div id="bag">
                     <h2>{{hero._name}}'s bag </h2>
                     <button (click)="createANewItemModal()">Create a new item</button>
-                    <new-item 
+                    <!--<new-item 
                         *ngIf="createANewItem" 
                         [hero]="hero" 
                         (modal)="backFromNewItemCreation($event)">
-                    </new-item>
+                    </new-item>-->
                     <ul class="items"> 
                         <li class="item" *ngFor="let item of bagList" [class.selected]="item === selectedItem" (click)="onSelect(item)">
                             <span class="badge">{{item.id}}</span> {{item._itemName}}
                         </li>
                     </ul>
                </div>`,
-    directives: [NewItemComponent]
+    //directives: [NewItemComponent]
 })
 
 export class BagComponent {
 
     private bagList         : Item[];
 
-    @Input() hero           : Hero;
+    @Input()
+    private hero           : Hero;
+
     private createANewItem  : boolean;
 
     private selectedItem    : Item;
 
     constructor(private router: Router, private itemService: ItemService) {
         this.getAllItemsFromHero();
-        this.createANewItem = false;
+        //this.createANewItem = false;
     }
     
     private getAllItemsFromHero(){
-        this.itemService.getAllItemsFromHero(this.hero.id)
-            .then(items => this.bagList = items);
+        //console.log(this.hero.id);
+        this.itemService.getAllItemsFromHero(1)
+            .then(items => {
+                this.bagList = items;
+                //console.log(this.hero);
+            });
+
     }
 
     private onSelect(item: Item) {
@@ -61,5 +68,5 @@ export class BagComponent {
     private backFromNewItemCreation(){
         this.createANewItem = false;
     }
-    
+
 }

@@ -23,7 +23,9 @@ export class DBInMemoryData {
                 _imgURL: "http://vignette3.wikia.nocookie.net/vsbattles/images/0/04/Goku_super_saiyan_god_normal_dbz_2013_by_xyelkiltrox-d66znce.jpg/revision/latest?cb=20150803133837"}
         ];
 
-        let items = [];
+        let items = [
+            {id: 1,_itemName: "Schultern des Glücks", _itemType: "Schultern", _heroId: 1 }
+        ];
         
          return {heroes, items};
     }
