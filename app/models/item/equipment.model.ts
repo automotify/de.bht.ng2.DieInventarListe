@@ -15,14 +15,14 @@ export class Equipment {
         this.weapon,
         this.offhand
     ];
-
-    helmet = new Gear("helmet", "helmet", 500);
-    shoulders = new Gear("Schultern der Zerstörung", "schoulder", 200);
-    legs = new Gear("legs", "legs", 450);
-    chest = new Gear("chest", "chest", 600);
-    boots = new Gear("boots", "boots", 250);
-    weapon = new Weapon("weapon", "sword", 250);
-    offhand = new Weapon("offhand", "shield", 500);
+    //id:number, itemName:string, itemType:string, heroId:number, gearCategory:string, gearDefenseValue:number
+    helmet = new Gear(1, "helmet", "helmet", 1, "gear", 500);
+    shoulders = new Gear(1, "Schultern der Zerstörung", "schoulder",1, "gear", 200);
+    legs = new Gear(1, "legs", "legs",1, "gear", 450);
+    chest = new Gear(1, "chest", "chest", 1, "gear",600);
+    boots = new Gear(1, "boots", "boots", 1, "gear",250);
+    weapon = new Weapon(1, "weapon", "sword", 1, "weapon", 250);
+    offhand = new Weapon(1, "offhand", "shield", 1, "weapon",500);
 
     //equip[0] = helmet ;
 

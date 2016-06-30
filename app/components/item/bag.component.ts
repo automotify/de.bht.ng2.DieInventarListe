@@ -3,7 +3,7 @@
  *
  * @author Daniel Schleußner
  */
-import { Component, Input } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { Router }           from "@angular/router"
 
 import {Hero}   from "../../models/hero/hero.model";
@@ -30,29 +30,31 @@ import {NewItemComponent} from "./new-item.component";
     //directives: [NewItemComponent]
 })
 
-export class BagComponent {
+export class BagComponent implements OnInit{
 
     private bagList         : Item[];
 
     @Input()
     private hero           : Hero;
 
+
     private createANewItem  : boolean;
 
     private selectedItem    : Item;
 
     constructor(private router: Router, private itemService: ItemService) {
-        this.getAllItemsFromHero();
+        //console.log(this.hero);
+
         //this.createANewItem = false;
     }
-    
+    ngOnInit(){
+        this.getAllItemsFromHero();
+
+    }
+
     private getAllItemsFromHero(){
-        //console.log(this.hero.id);
-        this.itemService.getAllItemsFromHero(1)
-            .then(items => {
-                this.bagList = items;
-                //console.log(this.hero);
-            });
+        this.itemService.getAllItemsFromHero(this.hero.id)
+            .then(items => this.bagList = items);
 
     }
 
