@@ -1,18 +1,26 @@
 import { Injectable }    from '@angular/core';
 import { Headers, Http } from '@angular/http';
-
+import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/toPromise';
 import { Hero }         from "../models/hero/hero.model";
 import { HeroService }  from "./hero.service";
 import { Item }         from "../models/item/item.model";
 
+
 @Injectable()
 export class ItemService {
 
-    private itemsUrl = 'app/items';  // URL to web api = DB
 
     constructor(private http: Http, private heroService : HeroService) { }
+    private itemsUrl = 'app/items';  // URL to web api = DB
+    private blizzUrl = 'https://eu.api.battle.net/wow/item/18803?locale=de_DE&apikey=4hszupqr2sctzvvadhmvf2vwhm2cgjmr';
 
+    getBlizzData(){
+        return this.http.get(this.blizzUrl)
+            .toPromise()
+            .then(res=>res.json());
+    };
+    
     getAllItems(): Promise<Item[]> {
         return this.http.get(this.itemsUrl)
             .toPromise()

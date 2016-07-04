@@ -3,11 +3,10 @@
  *
  * @author Daniel Schleußner
  */
-import { Component, Input, OnInit } from "@angular/core";
-import { Router }           from "@angular/router"
-
-import {Hero}   from "../../models/hero/hero.model";
-import {Item}   from "../../models/item/item.model";
+import {Component, Input, OnInit} from "@angular/core";
+import {Router} from "@angular/router";
+import {Hero} from "../../models/hero/hero.model";
+import {Item} from "../../models/item/item.model";
 import {ItemService} from "../../services/item.service";
 import {NewItemComponent} from "./new-item.component";
 
@@ -16,18 +15,18 @@ import {NewItemComponent} from "./new-item.component";
     template: `<div id="bag">
                     <h2>{{hero._name}}'s bag </h2>
                     <button (click)="createANewItemModal()">Create a new item</button>
-                    <!--<new-item 
+                    <new-item 
                         *ngIf="createANewItem" 
                         [hero]="hero" 
                         (modal)="backFromNewItemCreation($event)">
-                    </new-item>-->
+                    </new-item>
                     <ul class="items"> 
                         <li class="item" *ngFor="let item of bagList" [class.selected]="item === selectedItem" (click)="onSelect(item)">
                             <span class="badge">{{item.id}}</span> {{item._itemName}}
                         </li>
                     </ul>
                </div>`,
-    //directives: [NewItemComponent]
+    directives: [NewItemComponent]
 })
 
 export class BagComponent implements OnInit{
@@ -43,13 +42,10 @@ export class BagComponent implements OnInit{
     private selectedItem    : Item;
 
     constructor(private router: Router, private itemService: ItemService) {
-        //console.log(this.hero);
-
-        //this.createANewItem = false;
+        this.createANewItem = false;
     }
     ngOnInit(){
         this.getAllItemsFromHero();
-
     }
 
     private getAllItemsFromHero(){
