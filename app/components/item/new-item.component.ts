@@ -3,11 +3,12 @@ import {Hero} from "../../models/hero/hero.model";
 import {Item} from "../../models/item/item.model";
 import {ItemService} from "../../services/item.service";
 
+
 //noinspection JSAnnotator
 @Component({
     selector : 'new-item',
     template: ` <div class="item">                    
-                    <li class="item"><span class="badge">ID</span> {{newItem.id}}</li>
+                    <!--<li class="item"><span class="badge">ID</span> {{newItem.id}}</li>-->
                     <li class="item"><span class="badge">Name</span> 
                         <input [(ngModel)]="newItem._itemName" placeholder="name">
                     </li>
@@ -19,7 +20,7 @@ import {ItemService} from "../../services/item.service";
                     <li *ngIf="newItem._itemType == 'gear'" class="item">
                         <span class="badge">Category</span>
                         <select [(ngModel)]="newItem._gearCategory" (ngModelChange)="whichType(newItem._gearCategory)">
-                            <option *ngFor="let typen of gearTypes">{{typen}}</option>
+                            <option *ngFor="let typen of gearType">{{typen}}</option>
                         </select>
                     </li>
                     <li *ngIf="newItem._itemType == 'gear'" class="item">
@@ -44,7 +45,7 @@ import {ItemService} from "../../services/item.service";
                     <div>Output:{{getPromiseData}}</div><br/>
                 </div>
                 `,
-    
+   
 })
 
 export class NewItemComponent implements OnInit{
