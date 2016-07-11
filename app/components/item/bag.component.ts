@@ -22,7 +22,7 @@ import {NewItemComponent} from "./new-item.component";
                     </new-item>
                     <ul class="items"> 
                         <li class="item" *ngFor="let item of bagList" [class.selected]="item === selectedItem" (click)="onSelect(item)">
-                            <span class="badge">{{item.id}}</span> {{item._itemName}}
+                            <img src="http://media.blizzard.com/wow/icons/56/{{item.icon}}.jpg" height="100%" /> {{item.name}}
                         </li>
                     </ul>
                </div>`,
@@ -31,7 +31,7 @@ import {NewItemComponent} from "./new-item.component";
 
 export class BagComponent implements OnInit{
 
-    private bagList         : Item[];
+    private bagList = [];
 
     @Input()
     private hero           : Hero;
@@ -46,11 +46,22 @@ export class BagComponent implements OnInit{
     }
     ngOnInit(){
         this.getAllItemsFromHero();
+        //this.getBlizzItem();
     }
+    /*
+    private getBlizzItem(){
+        this.itemService.getBlizzData()
+            .then(item => this.bagList.push(item));
+    }*/
 
     private getAllItemsFromHero(){
-        this.itemService.getAllItemsFromHero(this.hero.id)
-            .then(items => this.bagList = items);
+
+        for(var i = 0; i < this.hero._bag.length; i++ ){
+            //console.log(this.hero._bag[i]);
+            this.itemService.getItem(this.hero._bag[i])
+                .then(item => this.bagList.push(item));
+        }
+
 
     }
 

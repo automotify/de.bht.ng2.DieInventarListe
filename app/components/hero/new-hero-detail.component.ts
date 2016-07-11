@@ -1,8 +1,6 @@
-import {Component, OnInit}  from '@angular/core';
-import { Router }           from '@angular/router'
-
-import { Hero }         from "../../models/hero/hero.model";
-import { HeroService }  from "../../services/hero.service";
+import {Component, OnInit} from "@angular/core";
+import {Router} from "@angular/router";
+import {Hero} from "../../models/hero/hero.model";
 
 //noinspection JSAnnotator
 @Component({
@@ -29,7 +27,7 @@ import { HeroService }  from "../../services/hero.service";
                                     </ul>
                                     <my-equipment [hero]="hero"></my-equipment>
                                     <div class="hero-img" >
-                                          <img src={{hero._imgURL}} width="200">
+                                          <img src="{{hero._imgURL}}" width="50%"/>
                                     </div>
                                 </div>
                             </div>
@@ -50,22 +48,21 @@ export class NewHeroDetailComponent implements OnInit {
     /**
      * create the services
      * @param router
-     * @param heroService
      */
     constructor(
-        private router:Router,
-        private heroService:HeroService){}
+        private router:Router){}
 
     /**
      * called the hero service and save these data in the db
      */
     private save(){
-
+        /*
         this.heroService.save(this.hero).then(hero => {
             this.hero = hero;
         });
 
         this.gotoHeroes()
+        */
     }
 
     /**
@@ -82,7 +79,7 @@ export class NewHeroDetailComponent implements OnInit {
         this.router.navigate(['/heroes']);
     }
 
-    goBack(){
+    static goBack(){
         window.history.back();
     }
 }

@@ -1,18 +1,19 @@
-import { Equipment }    from "../item/equipment.model";
-import { Item }         from "../item/item.model";
+import {Equipment} from "../item/equipment.model";
 
 export class Hero {
-    public id       :number;
+    public id      :number;
     public _name   :string;
     public _level  :number;
-    public _bag    :Item[];
+    public _bag    :number[];
     public _equip  :Equipment;
     public _imgURL :string;
 
     /**
      * Constructor
+     * @param id
      * @param name
      * @param level
+     * @param imgURL
      */
     constructor( id:number = 0, name: string = "<default>", level: number = 0, imgURL: string = "") {
         this.id      = id;

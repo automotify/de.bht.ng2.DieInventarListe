@@ -1,14 +1,26 @@
 import {Injectable} from "@angular/core";
-import {Headers, Http} from "@angular/http";
-import "rxjs/add/operator/toPromise";
-import {Hero} from "../models/hero/hero.model";
+import {HEROES} from "./db-in-memory.service";
+
 
 @Injectable()
 export class HeroService {
 
+    static getHeroes(){
+        return Promise.resolve(HEROES);
+    }
+
+    static getHero(id){
+        return Promise.resolve(HEROES[id])
+    }
+
+
+    /*
     private heroesUrl = 'app/heroes';  // URL to web api = DB
 
     constructor(private http: Http) { }
+
+
+
 
     getHeroes(): Promise<Hero[]> {
         return this.http.get(this.heroesUrl)
@@ -71,5 +83,5 @@ export class HeroService {
     private handleError(error: any) {
         console.error('An error occurred', error);
         return Promise.reject(error.message || error);
-    }
+    }*/
 }

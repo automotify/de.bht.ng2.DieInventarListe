@@ -1,30 +1,22 @@
-import {Injectable, ReflectiveInjector} from "@angular/core";
-import {Headers, Http, XHRBackend, BaseRequestOptions} from "@angular/http";
+import {Injectable} from "@angular/core";
+import {Http} from "@angular/http";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/toPromise";
-import {Hero} from "../models/hero/hero.model";
-import {HeroService} from "./hero.service";
-import {Item} from "../models/item/item.model";
 
 
 @Injectable()
 export class ItemService {
 
-
-    private itemsUrl = 'app/items';  // URL to web api = DB
-    private blizzUrl = 'https://eu.api.battle.net/wow/item/18803?locale=de_DE&apikey=4hszupqr2sctzvvadhmvf2vwhm2cgjmr'; //url to blizz api with only 1 item
-
-    private itemId: number = 100;
-    private injector;
-    private http2;
+    private blizzKey = "?locale=de_DE&apikey=4hszupqr2sctzvvadhmvf2vwhm2cgjmr";
+    private blizzUrl = "https://eu.api.battle.net/wow/item/";
     
-    constructor(private http: Http, private heroService : HeroService) {
+    constructor(private http: Http) {
         
         /*
         Generierung eigenen HTTP Service mit hilfe der Http-Klasse aus der doc.
         funktioniert aber leider noch nicht
          */
-        console.log("start");
+        /*console.log("start");
         this.injector = ReflectiveInjector.resolveAndCreate([
             BaseRequestOptions,
             XHRBackend,
@@ -36,46 +28,59 @@ export class ItemService {
         ]);
 
         this.http2 = this.injector.get(Http);
-
+*/
 
     }
 
     getBlizzData(){
-        return this.http2.get(this.blizzUrl)
+        return this.http.get(this.blizzUrl + 18803 + this.blizzKey)
             .toPromise()
             .then(res=>res.json())
-            .catch(this.handleError);
+            .catch(ItemService.handleError);
     };
-    
+    /*
     getAllItems(): Promise<Item[]> {
-        return this.http.get(this.itemsUrl)
+        return this.http.get(this.blizzUrl)
             .toPromise()
             .then(response => response.json().data)
             .catch(this.handleError);
-    }
+    }*/
 
+    getItem(id: number | string){
+        return this.http.get(this.blizzUrl + id + this.blizzKey)
+            .toPromise()
+            .then(res=>res.json())
+            .catch(ItemService.handleError);
+    }
+    /* Altes getItem (mit mock-Daten)
     getItem(id: number | string) {
         return this.getAllItems()
             .then(items => items.filter(item => item.id === +id)[0]);
     }
+    */
 
-    getAllItemsFromHero(id: number/* | string  /*hero._name?*/) {
+
+    /* Altes getItemsFromHero (mit mock-Daten)
+    getAllItemsFromHero(id: number/* | string ) {
         let hero: Hero;
         this.heroService.getHero(id)
             .then(h => hero = h);
         return this.getAllItems()
             .then(items => items.filter(item => item._heroId === hero.id));
-    }
+    }*/
 
-    save(item: Item): Promise<Item>  {
+    //save Item
+    /*save(item: Item): Promise<Item>  {
         item.id = this.itemId++;
-        /*if (item.id) {
+        if (item.id) {
             return this.put(item);
-        }*/
+        }
         return this.post(item);
-    }
+    }*/
 
-    delete(item: Item) {
+    //delete Item
+    /*delete(item: Item) {
+
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
@@ -85,10 +90,12 @@ export class ItemService {
             .delete(url, headers)
             .toPromise()
             .catch(this.handleError);
-    }
+
+    }*/
 
     // Add new Hero
-    private post(item: Item): Promise<Item> {
+    /*private post(item: Item): Promise<Item> {
+
         let headers = new Headers({
             'Content-Type': 'application/json'});
 
@@ -98,10 +105,12 @@ export class ItemService {
             .toPromise()
             .then(res => res.json().data)
             .catch(this.handleError);
-    }
+
+    }*/
 
     // Update existing Hero
-    private put(item: Item) {
+    /*private put(item: Item) {
+
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
@@ -112,9 +121,10 @@ export class ItemService {
             .toPromise()
             .then(() => item)
             .catch(this.handleError);
-    }
 
-    private handleError(error: any) {
+    }*/
+
+    private static handleError(error: any) {
         console.error('An error occurred', error);
         return Promise.reject(error.message || error);
     }

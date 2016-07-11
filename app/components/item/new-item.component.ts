@@ -90,13 +90,13 @@ export class NewItemComponent implements OnInit{
      * called the hero service and save these data in the db
      */
     private save(){
-
+        /*
         this.newItem._heroId = this.hero.id;
         this.itemService.save(this.newItem).then(item => {
             this.newItem = item;
         });
         console.log(this.newItem);
-        //this.modal.emit();
+        //this.modal.emit();*/
     }
 
 }

@@ -1,9 +1,8 @@
-import {Component, OnInit}      from '@angular/core';
-import { RouteSegment, Router } from '@angular/router';
-
-import { Hero }         from "../../models/hero/hero.model";
-import { HeroService }  from "../../services/hero.service";
-import { BagComponent } from "../item/bag.component";
+import {Component, OnInit} from "@angular/core";
+import {RouteSegment, Router} from "@angular/router";
+import {Hero} from "../../models/hero/hero.model";
+import {HeroService} from "../../services/hero.service";
+import {BagComponent} from "../item/bag.component";
 
 //noinspection JSAnnotator
 @Component({
@@ -21,7 +20,7 @@ import { BagComponent } from "../item/bag.component";
                         <!--<my-equipment [hero]="hero"></my-equipment>-->
                         <heros-bag [hero]="hero"></heros-bag>
                         <div class="hero-img" >
-                            <img src={{hero._imgURL}} width="200" >
+                            <img src="{{hero._imgURL}}" width="200" />
                         </div>
                     </div>
                 </div>
@@ -33,32 +32,31 @@ import { BagComponent } from "../item/bag.component";
 })
 
 export class HeroDetailComponent implements OnInit {
-    
+
+
     private hero:Hero;
 
     /**
      * create the services
      * @param router
      * @param routeParams
-     * @param heroService
      */
     constructor(private router:Router,
-                private routeParams:RouteSegment,
-                private heroService:HeroService) {
+                private routeParams:RouteSegment) {
     }
 
     /**
      * called the hero service and save these data in the db
      */
     private save() {
-
+        /*
         if (this.hero._name == "") this.hero._name = "<default>";
         
         this.heroService.save(this.hero).then(hero => {
             this.hero = hero;
         });
 
-        this.goToHeroes()
+        this.goToHeroes()*/
     }
 
     /**
@@ -67,7 +65,7 @@ export class HeroDetailComponent implements OnInit {
     ngOnInit() {
         if(+this.routeParams.getParam('id') != null){
             let id = +this.routeParams.getParam('id');
-            this.heroService.getHero(id)
+            HeroService.getHero(id)
                 .then(hero => this.hero = hero);
         }
     }
@@ -79,7 +77,7 @@ export class HeroDetailComponent implements OnInit {
         this.router.navigate(['/heroes']);
     }
 
-    goBack(){
+    static goBack(){
         window.history.back();
     }
 
