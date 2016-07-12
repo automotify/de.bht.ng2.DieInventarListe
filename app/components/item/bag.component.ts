@@ -14,12 +14,12 @@ import {NewItemComponent} from "./new-item.component";
     selector: 'heros-bag',
     template: `<div id="bag">
                     <h2>{{hero._name}}'s bag </h2>
-                    <button (click)="createANewItemModal()">Create a new item</button>
-                    <new-item 
+                    <button (click)="createANewItemModal()">Loot Item</button>
+                    <!--<new-item 
                         *ngIf="createANewItem" 
                         [hero]="hero" 
                         (modal)="backFromNewItemCreation($event)">
-                    </new-item>
+                    </new-item>-->
                     <ul class="items"> 
                         <li class="item" *ngFor="let item of bagList" [class.selected]="item === selectedItem" (click)="onSelect(item)">
                             <img src="http://media.blizzard.com/wow/icons/56/{{item.icon}}.jpg" height="100%" /> {{item.name}}
@@ -29,34 +29,36 @@ import {NewItemComponent} from "./new-item.component";
     directives: [NewItemComponent]
 })
 
-export class BagComponent implements OnInit{
+export class BagComponent implements OnInit {
 
     private bagList = [];
 
     @Input()
-    private hero           : Hero;
+    private hero:Hero;
 
 
-    private createANewItem  : boolean;
+    private createANewItem:boolean;
 
-    private selectedItem    : Item;
+    private selectedItem:Item;
 
-    constructor(private router: Router, private itemService: ItemService) {
+    constructor(private router:Router, private itemService:ItemService) {
         this.createANewItem = false;
     }
-    ngOnInit(){
+
+    ngOnInit() {
         this.getAllItemsFromHero();
         //this.getBlizzItem();
     }
+
     /*
-    private getBlizzItem(){
-        this.itemService.getBlizzData()
-            .then(item => this.bagList.push(item));
-    }*/
+     private getBlizzItem(){
+     this.itemService.getBlizzData()
+     .then(item => this.bagList.push(item));
+     }*/
 
-    private getAllItemsFromHero(){
+    private getAllItemsFromHero() {
 
-        for(var i = 0; i < this.hero._bag.length; i++ ){
+        for (var i = 0; i < this.hero._bag.length; i++) {
             //console.log(this.hero._bag[i]);
             this.itemService.getItem(this.hero._bag[i])
                 .then(item => this.bagList.push(item));
@@ -65,16 +67,27 @@ export class BagComponent implements OnInit{
 
     }
 
-    private onSelect(item: Item) {
+    private randomIntFromInterval(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+
+    private onSelect(item:Item) {
         this.selectedItem = item;
         this.router.navigate(['/item', this.selectedItem.id]);
     }
 
-    private createANewItemModal(){
-        this.createANewItem = true;
+    private createANewItemModal() {
+        //this.createANewItem = true;
+        var rnd = this.randomIntFromInterval(5000, 6000);
+        this.itemService.getItem(rnd)
+            .then(item => this.bagList.push(item),
+                err=>alert("No Item found, pleas try again")
+            );
+
     }
 
-    private backFromNewItemCreation(){
+    private backFromNewItemCreation() {
         this.createANewItem = false;
     }
 

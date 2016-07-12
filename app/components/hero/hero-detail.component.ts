@@ -3,6 +3,7 @@ import {RouteSegment, Router} from "@angular/router";
 import {Hero} from "../../models/hero/hero.model";
 import {HeroService} from "../../services/hero.service";
 import {BagComponent} from "../item/bag.component";
+import {EquipmentComponent} from "./equipment.componnent";
 
 //noinspection JSAnnotator
 @Component({
@@ -17,7 +18,7 @@ import {BagComponent} from "../item/bag.component";
                             <li class="item"><span class="badge">Level</span>      {{hero._level}}</li>
                             <li class="item"><span class="badge">Image</span>      <input [(ngModel)]="hero._imgURL" placeholder="image url"></li>
                         </ul>
-                        <!--<my-equipment [hero]="hero"></my-equipment>-->
+                        <my-equipment [hero]="hero"></my-equipment>
                         <heros-bag [hero]="hero"></heros-bag>
                         <div class="hero-img" >
                             <img src="{{hero._imgURL}}" width="200" />
@@ -28,7 +29,7 @@ import {BagComponent} from "../item/bag.component";
                     <h1>Hero not found!</h1>
                     <button (click)="goToHeroes()">Heroes</button>
                 </div>`,
-    directives: [BagComponent]
+    directives: [BagComponent, EquipmentComponent]
 })
 
 export class HeroDetailComponent implements OnInit {
@@ -77,7 +78,7 @@ export class HeroDetailComponent implements OnInit {
         this.router.navigate(['/heroes']);
     }
 
-    static goBack(){
+    goBack(){
         window.history.back();
     }
 

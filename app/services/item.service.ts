@@ -50,7 +50,7 @@ export class ItemService {
         return this.http.get(this.blizzUrl + id + this.blizzKey)
             .toPromise()
             .then(res=>res.json())
-            .catch(ItemService.handleError);
+            .catch();
     }
     /* Altes getItem (mit mock-Daten)
     getItem(id: number | string) {
