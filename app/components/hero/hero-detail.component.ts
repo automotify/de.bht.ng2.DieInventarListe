@@ -13,8 +13,8 @@ import {EquipmentComponent} from "./equipment.componnent";
                         <div class="row">
                             <div class="col-md-3">
                                 <h2>{{hero._name | uppercase}} details:</h2>
-                                <button class="btn btn-default btn-block" (click)="goBack()">Back</button>
-                                <button class="btn btn-default btn-block" (click)="save()">Save</button>
+                                <button class="btn btn-success btn-block" (click)="goBack()">Back</button>
+                                <button class="btn btn-success btn-block" (click)="save()">Save</button>
                             </div>
                         </div>
                         <div class="row">
@@ -26,7 +26,7 @@ import {EquipmentComponent} from "./equipment.componnent";
                                    </li>
                                    <li class="list-group-item">
                                         <h4>Level <label class="label label-primary">{{hero._level}}</label></h4>
-                                        <button class="btn btn-default btn-lg" (click)="levelUp()">Level UP!</button>
+                                        <button class="btn btn-success btn-lg" (click)="levelUp()">Level UP!</button>
                                    </li>
                                    <li class="list-group-item">
                                         <h4 class="list-group-item-heading">Image</h4>      
