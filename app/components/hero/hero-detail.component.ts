@@ -33,13 +33,15 @@ import {EquipmentComponent} from "./equipment.componnent";
                                         <input class="form-control" type="text" [(ngModel)]="hero._imgURL" placeholder="image url">
                                    </li>
                                 </ul>
-                                <my-equipment [hero]="hero"></my-equipment>
-                                <heros-bag [hero]="hero"></heros-bag>
-                                <div class="hero-img" >
-                                    <img src="{{hero._imgURL}}" width="200" />
-                                </div>
                             </div>
                         </div>
+                        <my-equipment [hero]="hero"></my-equipment>
+                        <heros-bag [hero]="hero"></heros-bag>
+                        <div class="hero-img" >
+                           <img src="{{hero._imgURL}}" width="200" />
+                        </div>
+                            
+                        
                     </div>
                 </div>
                 

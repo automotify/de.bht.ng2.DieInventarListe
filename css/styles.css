@@ -15,6 +15,10 @@ h1,h2,h3,h4{
     background-color: #345634;
     border: 1px solid #3d5d3d;
 }
+/*
+#test123{
+    background-color: #00AA00;
+}*/
 
 a.list-group-item {
     color: #ffffff;
@@ -31,6 +35,9 @@ ul.list-group a:hover {
     border: 1px solid #6c916c;
 }
 
+
+
+
 .centered {
     position: fixed;
     top: 50%;
@@ -45,8 +52,9 @@ ul.list-group a:hover {
 footer{
     position: fixed;
     height: 5%;
-    bottom: 0;
+    bottom: 1%;
     text-align: center;
+    right: 0;
 }
 
 .tooltip {
