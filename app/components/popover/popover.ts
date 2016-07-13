@@ -6,12 +6,13 @@ import {Component} from "@angular/core";
 @Component({
     selector: 'my-popover',
     template: `<span class="popover above" [class.popover-active]="active">
-                <div><p>Name   : {{ name }}</p> 
-                    <p>Level:     {{ level }}</p> 
-                    <p>Type:   {{ type }}</p> 
-                    <p>Equiped:  {{ donned }}</p> 
-                    <p>Category:  {{ category }}</p> 
-                    <p>Value:   {{ value }}</p>
+                <div><p>Name    : {{ name }}</p> 
+                    <p>Level    :     {{ level }}</p> 
+                    <p>Type     :   {{ type }}</p> 
+                    <p>Equiped  :  {{ donned }}</p> 
+                    <p>Category :  {{ category }}</p> 
+                    <p *ngIf="type == 'Weapon'">Damage   :   {{ value }}</p>
+                    <p *ngIf="type == 'Gear'">Armor    :   {{ value }}</p>
                 </div>
                 <ng-content></ng-content>               
               </span>`

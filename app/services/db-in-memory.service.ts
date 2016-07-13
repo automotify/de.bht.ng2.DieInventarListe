@@ -16,11 +16,11 @@ export var HEROES: Hero[] = [
 ];
 
 // id: number,_itemName : string, _itemLevel : number, _itemType : string, _heroId: number, _blizzItemId: number
-let standardGlove    = new Gear(0, "Handwickel der tiefen Erde" , 397, 0, 76749, "inv_glove_leather_raiddruid_k_01", "Helmet", 24);
+let standardGlove    = new Gear(0, "Handwickel der tiefen Erde" , 397, 0, 76749, "inv_glove_leather_raiddruid_k_01", "Glove", 24);
 let standardHelmet   = new Gear(1, "Helm der tiefen Erde"       , 397, 0, 76750, "inv_helmet_leather_raiddruid_k_01", "Helmet", 27);
-let standardShoulder = new Gear(2, "Mantelung der tiefen Erde"  , 397, 0, 76751, "inv_shoulder_leather_raiddruid_k_01", "Helmet", 20);
-let standardChest    = new Gear(3, "Roben der tiefen Erde"      , 397, 0, 76752, "inv_chest_leather_raiddruid_k_01", "Helmet", 33);
-let standardPant     = new Gear(4, "Beinwickel der tiefen Erde" , 397, 0, 76753, "inv_pant_leather_raiddruid_k_01", "Helmet", 29);
+let standardShoulder = new Gear(2, "Mantelung der tiefen Erde"  , 397, 0, 76751, "inv_shoulder_leather_raiddruid_k_01", "Shoulder", 20);
+let standardChest    = new Gear(3, "Roben der tiefen Erde"      , 397, 0, 76752, "inv_chest_leather_raiddruid_k_01", "Chest", 33);
+let standardPant     = new Gear(4, "Beinwickel der tiefen Erde" , 397, 0, 76753, "inv_pant_leather_raiddruid_k_01", "Pant", 29);
 export var ITEMS: Item[] = [ standardGlove, standardHelmet, standardShoulder, standardChest, standardPant ];
 
 /*
