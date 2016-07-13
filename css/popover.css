@@ -15,6 +15,8 @@
     padding: 7px 10px;
     width: 400%;
     z-index: 4;
+    top: 50%;
+    left: 100%;
 }
 
 .qs .popover:before {
@@ -30,9 +32,9 @@
 
 .qs .popover-active {
     display: block;
-    -webkit-animation: fade-in .3s linear 1, move-up .3s linear 1;
-    -moz-animation: fade-in .3s linear 1, move-up .3s linear 1;
-    -ms-animation: fade-in .3s linear 1, move-up .3s linear 1;
+    -webkit-animation: fade-in .3s linear 1;
+    -moz-animation: fade-in .3s linear 1;
+    -ms-animation: fade-in .3s linear 1;
 }
 
 /*.qs {
@@ -114,32 +116,6 @@
     }
 }
 
-@-webkit-keyframes move-up {
-    from {
-        bottom: 30px;
-    }
-    to {
-        bottom: 42px;
-    }
-}
-
-@-moz-keyframes move-up {
-    from {
-        bottom: 30px;
-    }
-    to {
-        bottom: 42px;
-    }
-}
-
-@-ms-keyframes move-up {
-    from {
-        bottom: 30px;
-    }
-    to {
-        bottom: 42px;
-    }
-}
 
 .active {
     background-color: #b9def0;

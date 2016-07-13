@@ -13,7 +13,7 @@ import { ItemDetailComponent }      from "./components/item/item-detail.componen
 @Component({
     selector: 'my-app',
     template: `
-    <header><h2>{{title}}</h2>
+    <header class="col-md-4 col-md-offset-4"><h2>{{title}}</h2>
         <nav>
             <a [routerLink]="['/']">Home</a>
             <a [routerLink]="['/heroes']">Heroes</a>

@@ -11,14 +11,14 @@ import {EquipmentComponent} from "./equipment.componnent";
                 <div>
                     <div *ngIf="hero" id="herodetails">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-4 col-md-offset-4">
                                 <h2>{{hero._name | uppercase}} details:</h2>
                                 <button class="btn btn-success btn-block" (click)="goBack()">Back</button>
                                 <button class="btn btn-success btn-block" (click)="save()">Save</button>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-4 col-md-offset-4">
                                 <ul class="list-group">
                                    <li class="list-group-item">
                                         <h4 class="list-group-item-heading">Name</h4>
