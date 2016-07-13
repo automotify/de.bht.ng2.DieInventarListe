@@ -24,7 +24,7 @@ import {Weapon} from "../../models/item/weapon.model";
                     </new-item>-->
                     <ul class="items"> 
                         <li class="item" *ngFor="let item of bagList" [class.selected]="item === selectedItem" (click)="onSelect(item)">
-                            <img src="http://media.blizzard.com/wow/icons/56/{{item._blizzItemIcon}}.jpg" height="100%" /> {{item._itemName}}
+                            <img popup src="http://media.blizzard.com/wow/icons/56/{{item._blizzItemIcon}}.jpg" height="100%" /> {{item._itemName}}
                         </li>
                     </ul>
                </div>`,
