@@ -1,22 +1,43 @@
 /* our style */
 body{
-    background-image: url("/included_files/WoW-Legion-Zonen-und-Dungeons-2.jpg");
+    background: url("/included_files/WoW-Legion-Zonen-und-Dungeons-2.jpg") fixed;
+}
+h1,h2,h3,h4{
+    color: #00AA00;
+
 }
 .btn-success{
     background-color: #3c763d;
     border-color: #2b542c;
 }
-
 .list-group-item {
     color: #ffffff;
     background-color: #345634;
     border: 1px solid #3d5d3d;
 }
-ul.list-group a:hover {
+/*
+#test123{
+    background-color: #00AA00;
+}*/
 
+a.list-group-item {
+    color: #ffffff;
+    background-color: #345634;
+    border: 1px solid #3d5d3d;
+}
+
+ul.list-group a:hover {
     background-color: #597d59;
     border: 1px solid #6c916c;
 }
+.form-control{
+    background-color: #5cb85c;
+    border: 1px solid #6c916c;
+}
+
+
+
+
 .centered {
     position: fixed;
     top: 50%;
@@ -31,8 +52,9 @@ ul.list-group a:hover {
 footer{
     position: fixed;
     height: 5%;
-    bottom: 0;
+    bottom: 1%;
     text-align: center;
+    right: 0;
 }
 
 .tooltip {
@@ -58,5 +80,5 @@ footer{
 
 /* everywhere else */
 * {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Orbitron', sans-serif;
 }
