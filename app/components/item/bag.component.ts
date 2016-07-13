@@ -13,6 +13,7 @@ import {Gear} from "../../models/item/gear.model";
 import {Weapon} from "../../models/item/weapon.model";
 import {Popup} from "../../directives/popup";
 import {PopoverComponent} from "../popover/popover";
+import {getCanActivateHook} from "@angular/router-deprecated/esm/src/lifecycle/route_lifecycle_reflector";
 
 @Component({
     selector: 'heros-bag',
@@ -86,7 +87,7 @@ export class BagComponent implements OnInit {
             .then(item => {
                     newItem.push(item);
                     //console.log(newItem[0].name);
-                    //console.log(item);
+                    console.log(item);
                     if(newItem[0].equippable) {
 
                         /*
@@ -110,6 +111,7 @@ export class BagComponent implements OnInit {
                         }
                     } else {
                         //console.log("not an item..")
+                        this.createANewItemModal()
                     }
 
                     this.getAllItemsFromHero();
