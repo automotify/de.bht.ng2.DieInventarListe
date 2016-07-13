@@ -6,14 +6,21 @@ import { HeroService }          from "../../services/hero.service";
 
 @Component({
     template: `<h1>Heroes</h1>
-                <button (click)="addHero()">Add New Hero</button>
-                <div id="heroes">
-                <ul class="items">
-                    <li *ngFor="let hero of heroList"  [class.selected]="hero === selectedHero" (click)="onSelect(hero)" class="items">
-                        <label class="badge">{{hero._level}}</label> {{hero._name}}
-                    </li>
-                </ul>
+                <div class="row">
+                    <div class="col-md-4">
+                        <button class="btn btn-success btn-lg btn-block" (click)="addHero()">Add New Hero</button>
+                    </div>
                 </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <ul class="list-group">
+                            <a class="list-group-item" *ngFor="let hero of heroList"  [class.active]="hero === selectedHero" (click)="onSelect(hero)">
+                                <h2><label class="label label-default">{{hero._level}}</label> {{hero._name}}</h2>
+                            </a>
+                        </ul>
+                    </div>
+                </div>
+              
     `,
     providers: [HeroService]
 })

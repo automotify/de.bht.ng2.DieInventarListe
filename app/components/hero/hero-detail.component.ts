@@ -7,28 +7,47 @@ import {EquipmentComponent} from "./equipment.componnent";
 
 //noinspection JSAnnotator
 @Component({
-    template: ` <div *ngIf="hero" id="herodetails">
-                    <h2>{{hero._name | uppercase}} details:</h2>
-                    <button (click)="goBack()">Back</button>
-                    <button (click)="save()">Save</button>
-                    <div class="hero-detail">
-                        <ul class="items">
-                            <li class="item"><span class="badge">ID</span>         {{hero.id}}</li>
-                            <li class="item"><span class="badge">Name</span>       <input [(ngModel)]="hero._name" placeholder="name"></li>
-                            <li class="item"><span class="badge">Level</span>      {{hero._level}}</li>
-                            <li class="item"><span class="badge">Image</span>      <input [(ngModel)]="hero._imgURL" placeholder="image url"></li>
-                        </ul>
-                        <my-equipment [hero]="hero"></my-equipment>
-                        <heros-bag [hero]="hero"></heros-bag>
-                        <div class="hero-img" >
-                            <img src="{{hero._imgURL}}" width="200" />
+    template: ` 
+                <div>
+                    <div *ngIf="hero" id="herodetails">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h2>{{hero._name | uppercase}} details:</h2>
+                                <button class="btn btn-default btn-block" (click)="goBack()">Back</button>
+                                <button class="btn btn-default btn-block" (click)="save()">Save</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <ul class="list-group">
+                                   <li class="list-group-item">
+                                        <h4 class="list-group-item-heading">Name</h4>
+                                        <input class="form-control" type="text" [(ngModel)]="hero._name" placeholder="name">
+                                   </li>
+                                   <li class="list-group-item">
+                                        <h4>Level <label class="label label-primary">{{hero._level}}</label></h4>
+                                        <button class="btn btn-default btn-lg" (click)="levelUp()">Level UP!</button>
+                                   </li>
+                                   <li class="list-group-item">
+                                        <h4 class="list-group-item-heading">Image</h4>      
+                                        <input class="form-control" type="text" [(ngModel)]="hero._imgURL" placeholder="image url">
+                                   </li>
+                                </ul>
+                                <my-equipment [hero]="hero"></my-equipment>
+                                <heros-bag [hero]="hero"></heros-bag>
+                                <div class="hero-img" >
+                                    <img src="{{hero._imgURL}}" width="200" />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                
                 <div *ngIf="!hero" id="noherodetails">
                     <h1>Hero not found!</h1>
                     <button (click)="goToHeroes()">Heroes</button>
-                </div>`,
+                </div>
+                `,
     directives: [BagComponent, EquipmentComponent]
 })
 
@@ -51,13 +70,16 @@ export class HeroDetailComponent implements OnInit {
      */
     private save() {
         /*
-        if (this.hero._name == "") this.hero._name = "<default>";
-        
-        this.heroService.save(this.hero).then(hero => {
-            this.hero = hero;
-        });
+         if (this.hero._name == "") this.hero._name = "<default>";
 
-        this.goToHeroes()*/
+         this.heroService.save(this.hero).then(hero => {
+         this.hero = hero;
+         });
+
+         this.goToHeroes()*/
+    }
+    levelUp(){
+        this.hero._level += 10;
     }
 
     /**
