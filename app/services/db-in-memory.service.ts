@@ -2,6 +2,7 @@
 import {Hero} from "../models/hero/hero.model";
 import {Equipment} from "../models/item/equipment.model";
 import {Item} from "../models/item/item.model";
+import {Gear} from "../models/item/gear.model";
 /**
  * hero-list.model.ts and hero-list.component.ts are deprecated, because the methods of these classes
  * are unused. We used the hero.service.ts methods now.
@@ -15,13 +16,12 @@ export var HEROES: Hero[] = [
 ];
 
 // id: number,_itemName : string, _itemLevel : number, _itemType : string, _heroId: number, _blizzItemId: number
-export var ITEMS: Item[] = [
-    {id: 0, _itemName: "Helm der tiefen Erde"           , _itemLevel : 0, _itemType: "Gear", _itemDonned : false, _heroId: 0, _blizzItemIcon: "inv_helmet_leather_raiddruid_k_01", _blizzItemId: 76749}, //standard
-    {id: 1, _itemName: "Handwickel der tiefen Erde"     , _itemLevel : 0, _itemType: "Gear", _itemDonned : false, _heroId: 0, _blizzItemIcon: "inv_glove_leather_raiddruid_k_01", _blizzItemId: 76750}, //standard
-    {id: 2, _itemName: "Roben der tiefen Erde"          , _itemLevel : 0, _itemType: "Gear", _itemDonned : false, _heroId: 0, _blizzItemIcon: "inv_chest_leather_raiddruid_k_01", _blizzItemId: 76751}, //standard
-    {id: 3, _itemName: "Mantelung der tiefen Erde"      , _itemLevel : 0, _itemType: "Gear", _itemDonned : false, _heroId: 0, _blizzItemIcon: "inv_shoulder_leather_raiddruid_k_01", _blizzItemId: 76752}, //standard
-    {id: 4, _itemName: "Beinwickel der tiefen Erde"     , _itemLevel : 0, _itemType: "Gear", _itemDonned : false, _heroId: 0, _blizzItemIcon: "inv_pant_leather_raiddruid_k_01", _blizzItemId: 76753} //standard
-];
+let standardGlove    = new Gear(0, "Handwickel der tiefen Erde" , 397, 0, 76749, "inv_glove_leather_raiddruid_k_01", "Helmet", 24);
+let standardHelmet   = new Gear(1, "Helm der tiefen Erde"       , 397, 0, 76750, "inv_helmet_leather_raiddruid_k_01", "Helmet", 27);
+let standardShoulder = new Gear(2, "Mantelung der tiefen Erde"  , 397, 0, 76751, "inv_shoulder_leather_raiddruid_k_01", "Helmet", 20);
+let standardChest    = new Gear(3, "Roben der tiefen Erde"      , 397, 0, 76752, "inv_chest_leather_raiddruid_k_01", "Helmet", 33);
+let standardPant     = new Gear(4, "Beinwickel der tiefen Erde" , 397, 0, 76753, "inv_pant_leather_raiddruid_k_01", "Helmet", 29);
+export var ITEMS: Item[] = [ standardGlove, standardHelmet, standardShoulder, standardChest, standardPant ];
 
 /*
 export class DBInMemoryData {

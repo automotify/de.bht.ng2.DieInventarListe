@@ -8,14 +8,19 @@ import { PopoverComponent } from '../components/popover/popover'
 
 @Directive({
     selector: '[popup]',
-    inputs: ['title'],
+    inputs: ['name', 'level', 'type', 'donned', 'category', 'value'],
     exportAs: 'popup',
 })
 
 export class Popup {
-    title: string;
+    name    : string;
+    level   : number;
+    type    : string;
+    donned  : boolean;
+    category: string;
+    value   : number;
     popovers: QueryList<PopoverComponent>;
-    popover: PopoverComponent;
+    popover : PopoverComponent;
 
     //@Input('title') title: String;
 
@@ -33,8 +38,13 @@ export class Popup {
     }
 
     ngAfterContentInit() {
-        this.popover = this.popovers.toArray()[0];
-        this.popover.title = this.title;
+        this.popover        = this.popovers.toArray()[0];
+        this.popover.name   = this.name;
+        this.popover.type   = this.type;
+        this.popover.level  = this.level;
+        this.popover.donned = this.donned;
+        this.popover.category = this.category;
+        this.popover.value  = this.value;
     }
 
     displayPopover(): void {

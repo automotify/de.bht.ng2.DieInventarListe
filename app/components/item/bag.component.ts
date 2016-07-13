@@ -11,24 +11,34 @@ import {ItemService} from "../../services/item.service";
 import {NewItemComponent} from "./new-item.component";
 import {Gear} from "../../models/item/gear.model";
 import {Weapon} from "../../models/item/weapon.model";
+import {Popup} from "../../directives/popup";
+import {PopoverComponent} from "../popover/popover";
 
 @Component({
     selector: 'heros-bag',
     template: `<div id="bag">
                     <h2>{{hero._name}}'s bag </h2>
                     <button (click)="createANewItemModal()">Loot Item</button>
-                    <!--<new-item 
-                        *ngIf="createANewItem" 
-                        [hero]="hero" 
-                        (modal)="backFromNewItemCreation($event)">
-                    </new-item>-->
                     <ul class="items"> 
-                        <li class="item" *ngFor="let item of bagList" [class.selected]="item === selectedItem" (click)="onSelect(item)">
-                            <img popup src="http://media.blizzard.com/wow/icons/56/{{item._blizzItemIcon}}.jpg" height="100%" /> {{item._itemName}}
+                        <li class="item" *ngFor="let item of bagList">
+                            <span popup *ngIf="item._itemType == 'Gear'"
+                                name="{{item._itemName}}" level="{{item._itemLevel}}" 
+                                type="{{item._itemType}}" donned="{{item._itemDonned}}"
+                                category="{{item._gearCategory}}"   value="{{item._gearDefenseValue}}">
+                                <img src="http://media.blizzard.com/wow/icons/56/{{item._blizzItemIcon}}.jpg" height="100%" />
+                                <my-popover></my-popover>
+                            </span>
+                            <span popup *ngIf="item._itemType == 'Weapon'" 
+                                name="{{item._itemName}}" level="{{item._itemLevel}}" 
+                                type="{{item._itemType}}" donned="{{item._itemDonned}}" 
+                                category="{{item._weaponCategory}}" value="{{item._weaponDamageValue}}">
+                                <img src="http://media.blizzard.com/wow/icons/56/{{item._blizzItemIcon}}.jpg" height="100%" />
+                                <my-popover></my-popover>
+                            </span>
                         </li>
                     </ul>
                </div>`,
-    directives: [NewItemComponent]
+    directives: [NewItemComponent, Popup, PopoverComponent]
 })
 
 export class BagComponent implements OnInit {
@@ -60,11 +70,12 @@ export class BagComponent implements OnInit {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-
+    /*
     private onSelect(item:Item) {
         this.selectedItem = item;
         this.router.navigate(['/item', this.selectedItem.id]);
-    }
+    }*/
+
 
     private createANewItemModal() {
         //this.createANewItem = true;
@@ -77,16 +88,23 @@ export class BagComponent implements OnInit {
                     //console.log(newItem[0].name);
                     //console.log(item);
                     if(newItem[0].equippable) {
+
+                        /*
+                         ToDo: set item._category from the icon string
+                         */
+
                         if(newItem[0].weaponInfo == undefined) {
                             //console.log("this item is a gear");
-                            var gearItem = new Gear(this.itemService.getNextFreeIndex(), newItem[0].name, newItem[0].itemLevel,
-                                "Gear", this.hero.id, newItem[0].id, newItem[0].icon, "category", newItem[0].armor);
+                            var gearItem = new Gear(this.itemService.getNextFreeIndex(), newItem[0].name,
+                                newItem[0].itemLevel, this.hero.id, newItem[0].id, newItem[0].icon, "category",
+                                newItem[0].armor);
                             //console.log(gearItem)
                             this.itemService.save(gearItem)
                         } else {
                             //console.log("this item is a weapon");
-                            var weaponItem = new Weapon(this.itemService.getNextFreeIndex(), newItem[0].name, newItem[0].itemLevel,
-                                "Weapon", this.hero.id, newItem[0].id, newItem[0].icon, "category", newItem[0].weaponInfo.dps);
+                            var weaponItem = new Weapon(this.itemService.getNextFreeIndex(), newItem[0].name,
+                                newItem[0].itemLevel, this.hero.id, newItem[0].id, newItem[0].icon, "category",
+                                newItem[0].weaponInfo.dps);
                             //console.log(weaponItem)
                             this.itemService.save(weaponItem)
                         }
@@ -100,9 +118,9 @@ export class BagComponent implements OnInit {
                 err=>this.createANewItemModal()
             );
     }
-
+    /*
     private backFromNewItemCreation() {
         this.createANewItem = false;
-    }
+    }*/
 
 }
