@@ -5,8 +5,8 @@ export class Weapon extends Item {
     public _weaponDamageValue   :number;
 
 
-    constructor(id:number, itemName:string, itemType:string, heroId:number, weaponCategory:string, weaponDamageValue:number) {
-        super(id, itemName, itemType, heroId);
+    constructor(id:number, itemName:string, itemLevel: number, itemType:string, heroId:number, blizzItemId: number, _blizzItemIcon: string, weaponCategory:string, weaponDamageValue:number) {
+        super(id, itemName, itemLevel, itemType, heroId, blizzItemId, _blizzItemIcon);
         this._weaponCategory = weaponCategory;
         this._weaponDamageValue = weaponDamageValue;
     }

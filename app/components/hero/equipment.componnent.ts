@@ -49,7 +49,7 @@ export class EquipmentComponent {
     //private equipment : Equipment = new Equipment();
 
     getGears() {
-        this.itemService.getBlizzData().then(gears => this.gears.push(gears));
+        //this.itemService.getBlizzData().then(gears => this.gears.push(gears));
     }
 
     ngOnInit() {

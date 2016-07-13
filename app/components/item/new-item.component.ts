@@ -74,9 +74,9 @@ export class NewItemComponent implements OnInit{
     }
 
     ngOnInit(){
-        this.newItem = new Item(300, "test", "gear", this.hero.id);
+        //this.newItem = new Item(300, "test", "gear", this.hero.id);
     }
-
+    /*
     getBlizzData(){
         console.log('Getting user based on promise now.');
         this.itemService.getBlizzData()
@@ -85,7 +85,7 @@ export class NewItemComponent implements OnInit{
                 err=>alert(err.message)
             );
 
-    }
+    }*/
     /**
      * called the hero service and save these data in the db
      */

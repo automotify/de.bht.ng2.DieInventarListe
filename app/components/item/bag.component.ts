@@ -9,6 +9,8 @@ import {Hero} from "../../models/hero/hero.model";
 import {Item} from "../../models/item/item.model";
 import {ItemService} from "../../services/item.service";
 import {NewItemComponent} from "./new-item.component";
+import {Gear} from "../../models/item/gear.model";
+import {Weapon} from "../../models/item/weapon.model";
 
 @Component({
     selector: 'heros-bag',
@@ -22,7 +24,7 @@ import {NewItemComponent} from "./new-item.component";
                     </new-item>-->
                     <ul class="items"> 
                         <li class="item" *ngFor="let item of bagList" [class.selected]="item === selectedItem" (click)="onSelect(item)">
-                            <img src="http://media.blizzard.com/wow/icons/56/{{item.icon}}.jpg" height="100%" /> {{item.name}}
+                            <img src="http://media.blizzard.com/wow/icons/56/{{item._blizzItemIcon}}.jpg" height="100%" /> {{item._itemName}}
                         </li>
                     </ul>
                </div>`,
@@ -31,7 +33,7 @@ import {NewItemComponent} from "./new-item.component";
 
 export class BagComponent implements OnInit {
 
-    private bagList = [];
+    private bagList : Item[];
 
     @Input()
     private hero:Hero;
@@ -47,24 +49,11 @@ export class BagComponent implements OnInit {
 
     ngOnInit() {
         this.getAllItemsFromHero();
-        //this.getBlizzItem();
     }
 
-    /*
-     private getBlizzItem(){
-     this.itemService.getBlizzData()
-     .then(item => this.bagList.push(item));
-     }*/
-
     private getAllItemsFromHero() {
-
-        for (var i = 0; i < this.hero._bag.length; i++) {
-            //console.log(this.hero._bag[i]);
-            this.itemService.getItem(this.hero._bag[i])
-                .then(item => this.bagList.push(item));
-        }
-
-
+        this.itemService.getAllItemsFromHero(this.hero.id)
+            .then(items =>  this.bagList = items)
     }
 
     private randomIntFromInterval(min, max) {
@@ -79,12 +68,37 @@ export class BagComponent implements OnInit {
 
     private createANewItemModal() {
         //this.createANewItem = true;
-        var rnd = this.randomIntFromInterval(5000, 6000);
-        this.itemService.getItem(rnd)
-            .then(item => this.bagList.push(item),
-                err=>alert("No Item found, pleas try again")
-            );
+        var rnd = this.randomIntFromInterval(1001, 150000);
+        var newItem = [];
 
+        this.itemService.getBlizzData(rnd)
+            .then(item => {
+                    newItem.push(item);
+                    //console.log(newItem[0].name);
+                    //console.log(item);
+                    if(newItem[0].equippable) {
+                        if(newItem[0].weaponInfo == undefined) {
+                            //console.log("this item is a gear");
+                            var gearItem = new Gear(this.itemService.getNextFreeIndex(), newItem[0].name, newItem[0].itemLevel,
+                                "Gear", this.hero.id, newItem[0].id, newItem[0].icon, "category", newItem[0].armor);
+                            //console.log(gearItem)
+                            this.itemService.save(gearItem)
+                        } else {
+                            //console.log("this item is a weapon");
+                            var weaponItem = new Weapon(this.itemService.getNextFreeIndex(), newItem[0].name, newItem[0].itemLevel,
+                                "Weapon", this.hero.id, newItem[0].id, newItem[0].icon, "category", newItem[0].weaponInfo.dps);
+                            //console.log(weaponItem)
+                            this.itemService.save(weaponItem)
+                        }
+                    } else {
+                        //console.log("not an item..")
+                    }
+
+                    this.getAllItemsFromHero();
+
+                },
+                err=>this.createANewItemModal()
+            );
     }
 
     private backFromNewItemCreation() {
