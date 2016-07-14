@@ -5,7 +5,7 @@ import {Component} from "@angular/core";
 
 @Component({
     selector: 'my-popover',
-    template: `<span class="popover above" [class.popover-active]="active">
+    template: `<span class="popover" [class.popover-active]="active">
                 <div><p>Name    : {{ name }}</p> 
                     <p>Level    :     {{ level }}</p> 
                     <p>Type     :   {{ type }}</p> 

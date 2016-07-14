@@ -17,11 +17,17 @@ import {ItemService} from "../../services/item.service";
                            <h2>{{hero._name}}'s Equipment</h2>
                            <ul>
                                 <div class="col-lg-6">
-                                    <img class="row" src="http://icons.iconarchive.com/icons/double-j-design/shiny/64/packet-icon.png" width="10%"/>
+                                    <div>
+                                        <img src="http://wow.zamimg.com/images/wow/icons/large/ability_fomor_boss_shout.jpg" height="100%" />
+                                    </div>
+                                    
                                     <img class="row" src="http://icons.iconarchive.com/icons/double-j-design/shiny/64/packet-icon.png" width="10%"/>
                                     <img class="row" src="http://icons.iconarchive.com/icons/double-j-design/shiny/64/packet-icon.png" width="10%"/>
                                 </div>
                                 <div class="col-lg-6">
+                                    <div pDroppable="dd">
+                                        <img class="row" src="http://icons.iconarchive.com/icons/double-j-design/shiny/64/packet-icon.png" width="10%"/>
+                                    </div>
                                     <img class="row" src="http://icons.iconarchive.com/icons/double-j-design/shiny/64/packet-icon.png" width="10%"/>
                                     <img class="row" src="http://icons.iconarchive.com/icons/double-j-design/shiny/64/packet-icon.png" width="10%"/>
                                     <img class="row" src="http://icons.iconarchive.com/icons/double-j-design/shiny/64/packet-icon.png" width="10%"/>

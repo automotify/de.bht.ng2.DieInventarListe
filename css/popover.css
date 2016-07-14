@@ -1,4 +1,5 @@
 /* The element to hover over */
+
 .qs {
     border-radius: 16px;
     cursor: hand;
@@ -14,8 +15,8 @@
     font-family: 'Helvetica', sans-serif;
     padding: 7px 10px;
     width: 800%;
+    top: -1100%;
     z-index: 4;
-    top: 50%;
     left: 100%;
 }
 
@@ -30,14 +31,9 @@
     position: absolute;
 }
 
-.qs .popover-active {
-    display: block;
-    -webkit-animation: fade-in .3s linear 1;
-    -moz-animation: fade-in .3s linear 1;
-    -ms-animation: fade-in .3s linear 1;
-}
 
-/*.qs {
+/*
+.qs {
     background-color: #02bdda;
     border-radius: 16px;
     color: #e3fbff;
@@ -56,16 +52,17 @@
 .qs .popover {
     background-color: rgba(0, 0, 0, 0.85);
     border-radius: 5px;
-    bottom: 42px;
+    //bottom: -500%;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
     color: #fff;
     display: none;
     font-size: 12px;
     font-family: 'Helvetica', sans-serif;
-    left: -95px;
+    left: -250%;
     padding: 7px 10px;
     position: absolute;
-    width: 200px;
+    width: 600%;
+    top: -650%;
     z-index: 4;
 }
 
@@ -79,15 +76,14 @@
     left: 50%;
     margin-left: -7px;
     position: absolute;
-}
-
-.qs .popover :hover {
-
+}*/
+.qs .popover-active {
     display: block;
     -webkit-animation: fade-in .3s linear 1, move-up .3s linear 1;
     -moz-animation: fade-in .3s linear 1, move-up .3s linear 1;
     -ms-animation: fade-in .3s linear 1, move-up .3s linear 1;
-}*/
+}
+
 
 @-webkit-keyframes fade-in {
     from {
@@ -115,7 +111,22 @@
         opacity: 1;
     }
 }
-
+/*
+@-webkit-keyframes move-up {
+    from {
+        bottom: 30px; }
+    to {
+        bottom: 42px; } }
+@-moz-keyframes move-up {
+    from {
+        bottom: 30px; }
+    to {
+        bottom: 42px; } }
+@-ms-keyframes move-up {
+    from {
+        bottom: 30px; }
+    to {
+        bottom: 42px; } }*/
 
 .active {
     background-color: #b9def0;
