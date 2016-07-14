@@ -13,11 +13,18 @@ import { ItemDetailComponent }      from "./components/item/item-detail.componen
 @Component({
     selector: 'my-app',
     template: `
-    <header class="col-md-4 col-md-offset-4"><h2>{{title}}</h2>
-        <nav>
-            <a [routerLink]="['/']">Home</a>
-            <a [routerLink]="['/heroes']">Heroes</a>
-        </nav>
+    <header>
+    <div class="wrapper container">
+        <div class="row">
+             <h2 class="text-center">{{title}}</h2>
+             <nav class="text-center">
+                <a [routerLink]="['/']">Home</a>
+                <a [routerLink]="['/heroes']">Heroes</a>
+            </nav>
+        </div>
+       
+    </div>
+        
     </header>
     <router-outlet></router-outlet>
     <router-outlet name="modal" ></router-outlet>

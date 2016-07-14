@@ -11,19 +11,27 @@ import {ItemService} from "../../services/item.service";
 
 @Component({
     selector: 'my-equipment',
-    template: `<div class="row">
-                    <div class="col-md-4 col-md-offset-4" [ngStyle]="style">
-                       <h2>{{hero._name}}'s Equipment</h2>
-                       <ul>
-                            <img src="http://icons.iconarchive.com/icons/double-j-design/shiny/64/packet-icon.png" width="15%"/>
-                            <img src="http://icons.iconarchive.com/icons/double-j-design/shiny/64/packet-icon.png" width="15%"/>
-                            <img src="http://icons.iconarchive.com/icons/double-j-design/shiny/64/packet-icon.png" width="15%"/>
-                            <img src="http://icons.iconarchive.com/icons/double-j-design/shiny/64/packet-icon.png" width="15%"/>
-                            <img src="http://icons.iconarchive.com/icons/double-j-design/shiny/64/packet-icon.png" width="15%"/>
-                            <img src="http://icons.iconarchive.com/icons/double-j-design/shiny/64/packet-icon.png" width="15%"/>
-                       </ul>
+    template: `<div class="wrapper container">
+                    <div class="row">
+                        <div [ngStyle]="style">
+                           <h2>{{hero._name}}'s Equipment</h2>
+                           <ul>
+                                <div class="col-lg-6">
+                                    <img class="row" src="http://icons.iconarchive.com/icons/double-j-design/shiny/64/packet-icon.png" width="10%"/>
+                                    <img class="row" src="http://icons.iconarchive.com/icons/double-j-design/shiny/64/packet-icon.png" width="10%"/>
+                                    <img class="row" src="http://icons.iconarchive.com/icons/double-j-design/shiny/64/packet-icon.png" width="10%"/>
+                                </div>
+                                <div class="col-lg-6">
+                                    <img class="row" src="http://icons.iconarchive.com/icons/double-j-design/shiny/64/packet-icon.png" width="10%"/>
+                                    <img class="row" src="http://icons.iconarchive.com/icons/double-j-design/shiny/64/packet-icon.png" width="10%"/>
+                                    <img class="row" src="http://icons.iconarchive.com/icons/double-j-design/shiny/64/packet-icon.png" width="10%"/>
+                                </div>
+                                
+                           </ul>
+                        </div>
+                        <item-detail *ngIf="selectedItem" [item]="selectedItem" (modal)="notSelected($event)"></item-detail>
                     </div>
-                    <item-detail *ngIf="selectedItem" [item]="selectedItem" (modal)="notSelected($event)"></item-detail>
+                    
                </div>`,
     directives: [ItemDetailComponent]
 })
@@ -47,8 +55,8 @@ export class EquipmentComponent {
         this.style = {'background-image': 'url(' + this.hero._imgURL + ')',
             'background-size': '50%',
             'background-repeat' : 'no-repeat',
-
-            'background-position' : 'center' };
+            'background-position' : 'center'
+            };
     }
 
     private onSelect(item:Gear) {

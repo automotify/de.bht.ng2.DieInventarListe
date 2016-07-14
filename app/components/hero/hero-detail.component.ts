@@ -8,17 +8,16 @@ import {EquipmentComponent} from "./equipment.componnent";
 //noinspection JSAnnotator
 @Component({
     template: ` 
-                <div>
+                <div class="wrapper container">
                     <div *ngIf="hero" id="herodetails">
                         <div class="row">
-                            <div class="col-md-4 col-md-offset-4">
+                            <div class="col-md-6 col-md-offset-3">
                                 <h2>{{hero._name | uppercase}} details:</h2>
                                 <button class="btn btn-success btn-block" (click)="goBack()">Back</button>
-                                <button class="btn btn-success btn-block" (click)="save()">Save</button>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4 col-md-offset-4">
+                            <div class="col-md-6 col-md-offset-3">
                                 <ul class="list-group">
                                    <li class="list-group-item">
                                         <h4 class="list-group-item-heading">Name</h4>
@@ -37,10 +36,6 @@ import {EquipmentComponent} from "./equipment.componnent";
                         </div>
                         <my-equipment [hero]="hero"></my-equipment>
                         <heros-bag [hero]="hero"></heros-bag>
-                        <div class="hero-img" >
-                           <img src="{{hero._imgURL}}" width="200" />
-                        </div>
-                            
                         
                     </div>
                 </div>
@@ -68,18 +63,8 @@ export class HeroDetailComponent implements OnInit {
     }
 
     /**
-     * called the hero service and save these data in the db
+     * let the Hero Level Up, he should get some new items
      */
-    private save() {
-        /*
-         if (this.hero._name == "") this.hero._name = "<default>";
-
-         this.heroService.save(this.hero).then(hero => {
-         this.hero = hero;
-         });
-
-         this.goToHeroes()*/
-    }
     levelUp(){
         this.hero._level += 10;
     }
@@ -102,6 +87,9 @@ export class HeroDetailComponent implements OnInit {
         this.router.navigate(['/heroes']);
     }
 
+    /**
+     * navigate back to screen befor
+     */
     goBack(){
         window.history.back();
     }

@@ -5,22 +5,30 @@ import { Hero }                 from "../../models/hero/hero.model";
 import { HeroService }          from "../../services/hero.service";
 
 @Component({
-    template: `<h1 class="col-md-4 col-md-offset-4">Heroes</h1>
-                <div class="row">
-                    <div class="col-md-4 col-md-offset-4">
-                        <button class="btn btn-success btn-lg btn-block" (click)="addHero()">Add New Hero</button>
+    template: `
+                <div class="wrapper container">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3">
+                            <h1>Heroes</h1>
+                            
+                            <button class="btn btn-success btn-lg btn-block" (click)="addHero()">Add New Hero</button>
+                            
+                            <div >
+                                <div >
+                                    <ul class="list-group">
+                                        <a class="list-group-item" *ngFor="let hero of heroList"  [class.active]="hero === selectedHero" (click)="onSelect(hero)">
+                                            <h2><label class="label label-primary">{{hero._level}}</label> {{hero._name}}</h2>
+                                        </a>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                      
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-4 col-md-offset-4">
-                        <ul class="list-group">
-                            <a class="list-group-item" *ngFor="let hero of heroList"  [class.active]="hero === selectedHero" (click)="onSelect(hero)">
-                                <h2><label class="label label-default">{{hero._level}}</label> {{hero._name}}</h2>
-                            </a>
-                        </ul>
-                    </div>
-                </div>
-              
+                
+                
     `,
     providers: [HeroService]
 })

@@ -1,6 +1,7 @@
 /* our style */
 body{
     background: url("/included_files/WoW-Legion-Zonen-und-Dungeons-2.jpg") fixed;
+    background-size: auto;
 }
 h1,h2,h3,h4{
     color: #00AA00;
