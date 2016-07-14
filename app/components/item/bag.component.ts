@@ -17,11 +17,15 @@ import {getCanActivateHook} from "@angular/router-deprecated/esm/src/lifecycle/r
 
 @Component({
     selector: 'heros-bag',
-    template: `<div id="bag">
-                    <h2>{{hero._name}}'s bag </h2>
-                    <button (click)="createANewItemModal()">Loot Item</button>
-                    <ul class="items"> 
-                        <li class="item" *ngFor="let item of bagList">
+    template: `<div class="wrapper container">
+                    <div class="row">
+                        <h2 class="text-center">{{hero._name}}'s bag </h2>
+                        <div class="col-md-2">
+                             <button class="btn btn-success btn-block" (click)="createANewItemModal()">Loot Item</button>                        
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1" *ngFor="let item of bagList">
                             <span popup *ngIf="item._itemType == 'Gear'"
                                 name="{{item._itemName}}" level="{{item._itemLevel}}" 
                                 type="{{item._itemType}}" donned="{{item._itemDonned}}"
@@ -36,8 +40,11 @@ import {getCanActivateHook} from "@angular/router-deprecated/esm/src/lifecycle/r
                                 <img src="http://media.blizzard.com/wow/icons/56/{{item._blizzItemIcon}}.jpg" height="100%" />
                                 <my-popover></my-popover>
                             </span>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        
+                    </div>
                </div>`,
     directives: [NewItemComponent, Popup, PopoverComponent]
 })
