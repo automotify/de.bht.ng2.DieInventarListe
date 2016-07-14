@@ -1,14 +1,8 @@
-import { Component }                 from '@angular/core';
-import { Routes, ROUTER_DIRECTIVES } from '@angular/router';
+import { Component }                from '@angular/core';
+import { ROUTER_DIRECTIVES }        from '@angular/router';
 
 import { HeroService }              from "./services/hero.service";
 import { ItemService }              from "./services/item.service";
-
-import { DashboardComponent }       from "./components/dashboard.component";
-import { HeroesComponent }          from "./components/hero/heroes.component";
-import { HeroDetailComponent }      from "./components/hero/hero-detail.component";
-import { NewHeroDetailComponent }   from "./components/hero/new-hero-detail.component";
-import { ItemDetailComponent }      from "./components/item/item-detail.component";
 
 @Component({
     selector: 'my-app',
@@ -33,13 +27,6 @@ import { ItemDetailComponent }      from "./components/item/item-detail.componen
     providers:  [HeroService, ItemService],
     directives: [ROUTER_DIRECTIVES]
 })
-@Routes([
-    {path: '/',             component: DashboardComponent},
-    {path: '/heroes',       component: HeroesComponent},
-    {path: '/hero/:id',     component: HeroDetailComponent      /*, outlet: 'modal'*/ },
-    {path: '/newHero',      component: NewHeroDetailComponent   /*, outlet: 'modal'*/ },
-    {path: '/item/:id',     component: ItemDetailComponent      /*, outlet: 'modal'*/ }
-])
 
 export class AppComponent{
     title       : string;

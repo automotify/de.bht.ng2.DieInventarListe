@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {RouteSegment, Router} from "@angular/router";
+import {Router, ActivatedRoute} from "@angular/router";
 import {Hero} from "../../models/hero/hero.model";
 import {HeroService} from "../../services/hero.service";
 import {BagComponent} from "../item/bag.component";
@@ -56,10 +56,10 @@ export class HeroDetailComponent implements OnInit {
     /**
      * create the services
      * @param router
-     * @param routeParams
+     * @param route
      */
     constructor(private router:Router,
-                private routeParams:RouteSegment) {
+                private route: ActivatedRoute) {
     }
 
     /**
@@ -73,11 +73,15 @@ export class HeroDetailComponent implements OnInit {
      * get the hero with id
      */
     ngOnInit() {
-        if(+this.routeParams.getParam('id') != null){
-            let id = +this.routeParams.getParam('id');
-            HeroService.getHero(id)
-                .then(hero => this.hero = hero);
-        }
+        /*if(+this.routeParams.getParam('id') != null){
+         let id = +this.routeParams.getParam('id');
+         HeroService.getHero(id)
+         .then(hero => this.hero = hero);
+         }*/
+        var sub = this.route.params.subscribe(params => {
+            let id = +params['id'];
+            HeroService.getHero(id).then(hero => this.hero = hero)
+        });
     }
 
     /**

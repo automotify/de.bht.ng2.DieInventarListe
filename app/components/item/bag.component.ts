@@ -109,7 +109,7 @@ export class BagComponent implements OnInit {
                         var category = "";
                         let string = item.icon;
                         let subStringArray = ["helm", "helmet", "chest", "shoulder", "cape", "glove", "boot", "boots",
-                            "pant", "belt", "wand", "axe", "staff", "sword", "mail"];
+                            "pant", "belt", "wand", "axe", "staff", "sword", "mail", "bracer", "misc"];
                         for(var i = 0; i < subStringArray.length; i++){
                             if (string.indexOf(subStringArray[i]) > -1)
                                 category = this.capitalizeFirstLetter(subStringArray[i]);
