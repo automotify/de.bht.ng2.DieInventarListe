@@ -20,7 +20,7 @@ import {getCanActivateHook} from "@angular/router-deprecated/esm/src/lifecycle/r
     template: `<div class="wrapper container">
                     <div class="row">
                         <h2 class="text-center">{{hero._name}}'s bag </h2>
-                        <div class="col-md-2">
+                        <div class="col-md-2 col-md-offset-5">
                              <button class="btn btn-success btn-block" (click)="createANewItemModal()">Loot Item</button>                        
                         </div>
                     </div>

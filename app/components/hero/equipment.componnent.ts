@@ -12,32 +12,30 @@ import {ItemService} from "../../services/item.service";
 @Component({
     selector: 'my-equipment',
     template: `<div class="wrapper container">
-                    <div class="row">
-                        <div [ngStyle]="style">
-                           <h2>{{hero._name}}'s Equipment</h2>
-                           <ul>
-                                <div class="col-lg-6">
-                                    <div>
-                                        <img src="http://wow.zamimg.com/images/wow/icons/large/ability_fomor_boss_shout.jpg" height="100%" />
-                                    </div>
-                                    
-                                    <img class="row" src="http://icons.iconarchive.com/icons/double-j-design/shiny/64/packet-icon.png" width="10%"/>
-                                    <img class="row" src="http://icons.iconarchive.com/icons/double-j-design/shiny/64/packet-icon.png" width="10%"/>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div pDroppable="dd">
-                                        <img class="row" src="http://icons.iconarchive.com/icons/double-j-design/shiny/64/packet-icon.png" width="10%"/>
-                                    </div>
-                                    <img class="row" src="http://icons.iconarchive.com/icons/double-j-design/shiny/64/packet-icon.png" width="10%"/>
-                                    <img class="row" src="http://icons.iconarchive.com/icons/double-j-design/shiny/64/packet-icon.png" width="10%"/>
-                                    <img class="row" src="http://icons.iconarchive.com/icons/double-j-design/shiny/64/packet-icon.png" width="10%"/>
-                                </div>
-                                
-                           </ul>
+                   <h2 class="text-center">{{hero._name}}'s Equipment</h2>
+                   <div [ngStyle]="style">
+                        <div class="row">
+                            <div class="col-md-5 col-md-offset-3">
+                                <img class="img-rounded" src="http://wow.zamimg.com/images/wow/icons/large/ability_fomor_boss_shout.jpg" height="100%" />
+                            </div>
+                            <div class="col-md-4">
+                                <img class="img-rounded" src="http://wow.zamimg.com/images/wow/icons/large/ability_fomor_boss_shout.jpg" height="100%" />
+                            </div>
+                            <div class="col-md-5 col-md-offset-3">
+                                <img class="img-rounded" src="http://wow.zamimg.com/images/wow/icons/large/ability_fomor_boss_shout.jpg" height="100%" />
+                            </div>
+                            <div class="col-md-4">
+                                <img class="img-rounded" src="http://wow.zamimg.com/images/wow/icons/large/ability_fomor_boss_shout.jpg" height="100%" />
+                            </div>
+                            <div class="col-md-5 col-md-offset-3">
+                                <img class="img-rounded" src="http://wow.zamimg.com/images/wow/icons/large/ability_fomor_boss_shout.jpg" height="100%" />
+                            </div>
+                            <div class="col-md-4">
+                                <img class="img-rounded" src="http://wow.zamimg.com/images/wow/icons/large/ability_fomor_boss_shout.jpg" height="100%" />
+                            </div>
                         </div>
                         <item-detail *ngIf="selectedItem" [item]="selectedItem" (modal)="notSelected($event)"></item-detail>
-                    </div>
-                    
+                   </div>
                </div>`,
     directives: [ItemDetailComponent]
 })
@@ -59,7 +57,7 @@ export class EquipmentComponent {
     ngOnInit() {
         this.getGears();
         this.style = {'background-image': 'url(' + this.hero._imgURL + ')',
-            'background-size': '50%',
+            'background-size': '15%',
             'background-repeat' : 'no-repeat',
             'background-position' : 'center'
             };
