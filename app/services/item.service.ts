@@ -19,8 +19,7 @@ export class ItemService {
     getBlizzData(id : number | string){
         return this.http.get(this.blizzUrl + id + this.blizzKey)
             .toPromise()
-            .then(res=>res.json())
-            .catch();
+            .then(res=>res.json()/*,err=>{"get error"}*/);
     };
 
     getAllItems(): Promise<Item[]> {
