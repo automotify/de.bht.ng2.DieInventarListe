@@ -3,17 +3,16 @@
  *
  * @author Daniel Schleußner
  */
-import {Component, Input, OnInit} from "@angular/core";
-import {Router} from "@angular/router";
-import {Hero} from "../../models/hero/hero.model";
-import {Item} from "../../models/item/item.model";
-import {ItemService} from "../../services/item.service";
-import {NewItemComponent} from "./new-item.component";
-import {Gear} from "../../models/item/gear.model";
-import {Weapon} from "../../models/item/weapon.model";
-import {Popup} from "../../directives/popup";
-import {PopoverComponent} from "../popover/popover";
-import {getCanActivateHook} from "@angular/router-deprecated/esm/src/lifecycle/route_lifecycle_reflector";
+import {Component, Input, OnInit}   from "@angular/core";
+import {Router}                     from "@angular/router";
+import {Hero}                       from "../../models/hero/hero.model";
+import {Item}                       from "../../models/item/item.model";
+import {ItemService}                from "../../services/item.service";
+import {NewItemComponent}           from "./new-item.component";
+import {Gear}                       from "../../models/item/gear.model";
+import {Weapon}                     from "../../models/item/weapon.model";
+import {Popup}                      from "../../directives/popup";
+import {PopoverComponent}           from "../popover/popover";
 
 @Component({
     selector: 'heros-bag',
@@ -56,7 +55,6 @@ export class BagComponent implements OnInit {
     @Input()
     private hero:Hero;
 
-
     private createANewItem:boolean;
 
     private selectedItem:Item;
@@ -69,13 +67,12 @@ export class BagComponent implements OnInit {
         this.getAllItemsFromHero();
     }
 
+    /**
+     * call all items from this hero
+     */
     private getAllItemsFromHero() {
         this.itemService.getAllItemsFromHero(this.hero.id)
             .then(items => this.bagList = items)
-    }
-
-    private randomIntFromInterval(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
     /*
@@ -84,69 +81,15 @@ export class BagComponent implements OnInit {
      this.router.navigate(['/item', this.selectedItem.id]);
      }*/
 
-    private capitalizeFirstLetter(s) {
-        return s.charAt(0).toUpperCase() + s.slice(1);
-    };
-
+    /**
+     * call the blizzard api to create an item for this hero
+     */
     private createANewItemModal() {
-        //this.createANewItem = true;
-        var rnd = this.randomIntFromInterval(1001, 150000);
-
-        this.itemService.getBlizzData(rnd)
-            .then(item => {
-                //if (item.indexOf("err") > -1) {
-                    //console.log("error");
-                    //this.createANewItemModal();
-                //} else {
-                    //console.log("item");
-                    console.log(item);
-                    if (item.equippable) {
-
-                        /*
-                         ToDo: catch the get error if the blizzard api cannot found an item
-                         ToDo: implement this method in item.service
-                         */
-                        var category = "";
-                        let string = item.icon;
-                        let subStringArray = ["helm", "helmet", "chest", "shoulder", "cape", "glove", "boot", "boots",
-                            "pant", "belt", "wand", "axe", "staff", "sword", "mail", "bracer", "misc"];
-                        for(var i = 0; i < subStringArray.length; i++){
-                            if (string.indexOf(subStringArray[i]) > -1)
-                                category = this.capitalizeFirstLetter(subStringArray[i]);
-                        }
-
-                        if (item.weaponInfo == undefined) {
-                            if (item.armor == 0) {
-                                //throw "try again2.."
-                                this.createANewItemModal();
-                            } else {
-                                //console.log("this item is a gear");
-                                var gearItem = new Gear(this.itemService.getNextFreeIndex(), item.name,
-                                    item.itemLevel, this.hero.id, item.id, item.icon, category,
-                                    item.armor);
-                                //console.log(gearItem)
-                                this.itemService.save(gearItem)
-                            }
-                        } else {
-                            //console.log("this item is a weapon");
-                            var weaponItem = new Weapon(this.itemService.getNextFreeIndex(), item.name,
-                                item.itemLevel, this.hero.id, item.id, item.icon, category,
-                                item.weaponInfo.dps);
-                            //console.log(weaponItem)
-                            this.itemService.save(weaponItem)
-                        }
-                    } else {
-                        //console.log("not an item..")
-                        //throw "try again2.."
-                        this.createANewItemModal();
-                    }
-
-                    this.getAllItemsFromHero();
-                //}
-
-            }).catch(function (e) {
-            console.log("HalloFehler " + e);
-            //this.createANewItemModal(); // == null --> second To.Do
+        this.itemService.getBlizzData(this.hero.id).then(i=> {
+            if (i != undefined) {
+                //console.log(i);
+                this.getAllItemsFromHero();
+            }
         });
     }
 

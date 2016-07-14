@@ -51,7 +51,6 @@ ul.list-group a:hover {
     float: right;
 }
 footer{
-    position: fixed;
     height: 5%;
     bottom: 1%;
     text-align: center;
