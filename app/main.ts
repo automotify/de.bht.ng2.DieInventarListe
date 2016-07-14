@@ -1,12 +1,13 @@
+/// <reference path="../typings/index.d.ts" />
 import {bootstrap} from "@angular/platform-browser-dynamic";
-import {ROUTER_PROVIDERS} from "@angular/router";
 import {HTTP_PROVIDERS} from "@angular/http";
 
 import {AppComponent} from "./app.component";
+import {APP_ROUTER_PROVIDERS} from "./routes/app.routes";
 //import {DBInMemoryData} from "./services/db-in-memory.service";
 
 bootstrap(AppComponent, [
-    ROUTER_PROVIDERS,
+    APP_ROUTER_PROVIDERS,
     HTTP_PROVIDERS,
     /*
     provide(XHRBackend, { useClass: InMemoryBackendService }),  // in-mem server
