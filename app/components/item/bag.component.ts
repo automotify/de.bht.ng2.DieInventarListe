@@ -44,7 +44,7 @@ import {getCanActivateHook} from "@angular/router-deprecated/esm/src/lifecycle/r
 
 export class BagComponent implements OnInit {
 
-    private bagList : Item[];
+    private bagList:Item[];
 
     @Input()
     private hero:Hero;
@@ -64,7 +64,7 @@ export class BagComponent implements OnInit {
 
     private getAllItemsFromHero() {
         this.itemService.getAllItemsFromHero(this.hero.id)
-            .then(items =>  this.bagList = items)
+            .then(items => this.bagList = items)
     }
 
     private randomIntFromInterval(min, max) {
@@ -72,57 +72,75 @@ export class BagComponent implements OnInit {
     }
 
     /*
-    private onSelect(item:Item) {
-        this.selectedItem = item;
-        this.router.navigate(['/item', this.selectedItem.id]);
-    }*/
+     private onSelect(item:Item) {
+     this.selectedItem = item;
+     this.router.navigate(['/item', this.selectedItem.id]);
+     }*/
 
+    private capitalizeFirstLetter(s) {
+        return s.charAt(0).toUpperCase() + s.slice(1);
+    };
 
     private createANewItemModal() {
         //this.createANewItem = true;
         var rnd = this.randomIntFromInterval(1001, 150000);
-        var newItem = [];
 
         this.itemService.getBlizzData(rnd)
             .then(item => {
-                    newItem.push(item);
-                    //console.log(newItem[0].name);
+                //if (item.indexOf("err") > -1) {
+                    //console.log("error");
+                    //this.createANewItemModal();
+                //} else {
+                    //console.log("item");
                     console.log(item);
-                    if(newItem[0].equippable) {
+                    if (item.equippable) {
 
                         /*
-                         ToDo: set item._category from the icon string
+                         ToDo: catch the get error if the blizzard api cannot found an item
+                         ToDo: implement this method in item.service
                          */
+                        var category = "";
+                        let string = item.icon;
+                        let subStringArray = ["helm", "helmet", "chest", "shoulder", "cape", "glove", "boot", "boots",
+                            "pant", "belt", "wand", "axe", "staff", "sword", "mail"];
+                        for(var i = 0; i < subStringArray.length; i++){
+                            if (string.indexOf(subStringArray[i]) > -1)
+                                category = this.capitalizeFirstLetter(subStringArray[i]);
+                        }
 
-                        if(newItem[0].weaponInfo == undefined) {
-                            //console.log("this item is a gear");
-                            var gearItem = new Gear(this.itemService.getNextFreeIndex(), newItem[0].name,
-                                newItem[0].itemLevel, this.hero.id, newItem[0].id, newItem[0].icon, "category",
-                                newItem[0].armor);
-                            //console.log(gearItem)
-                            this.itemService.save(gearItem)
+                        if (item.weaponInfo == undefined) {
+                            if (item.armor == 0) {
+                                //throw "try again2.."
+                                this.createANewItemModal();
+                            } else {
+                                //console.log("this item is a gear");
+                                var gearItem = new Gear(this.itemService.getNextFreeIndex(), item.name,
+                                    item.itemLevel, this.hero.id, item.id, item.icon, category,
+                                    item.armor);
+                                //console.log(gearItem)
+                                this.itemService.save(gearItem)
+                            }
                         } else {
                             //console.log("this item is a weapon");
-                            var weaponItem = new Weapon(this.itemService.getNextFreeIndex(), newItem[0].name,
-                                newItem[0].itemLevel, this.hero.id, newItem[0].id, newItem[0].icon, "category",
-                                newItem[0].weaponInfo.dps);
+                            var weaponItem = new Weapon(this.itemService.getNextFreeIndex(), item.name,
+                                item.itemLevel, this.hero.id, item.id, item.icon, category,
+                                item.weaponInfo.dps);
                             //console.log(weaponItem)
                             this.itemService.save(weaponItem)
                         }
                     } else {
                         //console.log("not an item..")
-                        this.createANewItemModal()
+                        //throw "try again2.."
+                        this.createANewItemModal();
                     }
 
                     this.getAllItemsFromHero();
+                //}
 
-                },
-                err=>this.createANewItemModal()
-            );
+            }).catch(function (e) {
+            console.log("HalloFehler " + e);
+            //this.createANewItemModal(); // == null --> second To.Do
+        });
     }
-    /*
-    private backFromNewItemCreation() {
-        this.createANewItem = false;
-    }*/
 
 }
