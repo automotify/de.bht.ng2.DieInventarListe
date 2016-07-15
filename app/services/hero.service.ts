@@ -1,5 +1,6 @@
 import {Injectable} from "@angular/core";
 import {HEROES} from "./db-in-memory.service";
+import {Hero} from "../models/hero/hero.model";
 
 
 @Injectable()
@@ -12,7 +13,13 @@ export class HeroService {
     static getHero(id){
         return Promise.resolve(HEROES[id])
     }
-
+    static save(hero: Hero): Promise<Hero> {
+        hero.id = HEROES.length;
+        HEROES.push(hero);   // new Hero
+        console.log("save : " + hero);
+        console.log("next free index is " + HEROES.length);
+        return;
+    }
 
     /*
     private heroesUrl = 'app/heroes';  // URL to web api = DB
@@ -34,12 +41,7 @@ export class HeroService {
             .then(heroes => heroes.filter(hero => hero.id === +id)[0]);
     }
 
-    save(hero: Hero): Promise<Hero>  {
-        if (hero.id) {
-            return this.put(hero);
-        }
-        return this.post(hero);
-    }
+
 
     delete(hero: Hero) {
         let headers = new Headers();

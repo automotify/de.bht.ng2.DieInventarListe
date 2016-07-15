@@ -15,7 +15,7 @@ export class Hero {
      * @param level
      * @param imgURL
      */
-    constructor( id:number = 0, name: string = "<default>", level: number = 0, imgURL: string = "") {
+    constructor( id:number = 0, name: string = "<default>", level: number = 1, imgURL: string = "") {
         this.id      = id;
         this._name   = name;
         this._level  = level;

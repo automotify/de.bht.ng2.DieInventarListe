@@ -22,7 +22,11 @@ import { ItemService }              from "./services/item.service";
     </header>
     <router-outlet></router-outlet>
     <router-outlet name="modal" ></router-outlet>
-    <footer>This project was developed by {{developers}}</footer>
+    <footer class="footer">
+        <div class="text-center">
+            This project was developed by {{developers}}
+        </div>
+    </footer>
   `,
     providers:  [HeroService, ItemService],
     directives: [ROUTER_DIRECTIVES]

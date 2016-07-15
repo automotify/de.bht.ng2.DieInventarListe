@@ -50,13 +50,7 @@ ul.list-group a:hover {
     //text-align: center;
     float: right;
 }
-footer{
-    position: fixed;
-    height: 5%;
-    bottom: 1%;
-    text-align: center;
-    right: 0;
-}
+
 
 .tooltip {
        position: relative;

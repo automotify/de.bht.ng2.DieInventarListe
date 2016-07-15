@@ -14,6 +14,7 @@ import {Weapon} from "../../models/item/weapon.model";
 import {Popup} from "../../directives/popup";
 import {PopoverComponent} from "../popover/popover";
 import {getCanActivateHook} from "@angular/router-deprecated/esm/src/lifecycle/route_lifecycle_reflector";
+import {DragulaService, Dragula} from "ng2-dragula/ng2-dragula";
 
 @Component({
     selector: 'heros-bag',
@@ -25,33 +26,36 @@ import {getCanActivateHook} from "@angular/router-deprecated/esm/src/lifecycle/r
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-1" *ngFor="let item of bagList">
-                            <span popup *ngIf="item._itemType == 'Gear'"
-                                name="{{item._itemName}}" level="{{item._itemLevel}}" 
-                                type="{{item._itemType}}" donned="{{item._itemDonned}}"
-                                category="{{item._gearCategory}}"   value="{{item._gearDefenseValue}}">
-                                <img src="http://media.blizzard.com/wow/icons/56/{{item._blizzItemIcon}}.jpg" height="100%" />
-                                <my-popover></my-popover>
-                            </span>
-                            <span popup *ngIf="item._itemType == 'Weapon'" 
-                                name="{{item._itemName}}" level="{{item._itemLevel}}" 
-                                type="{{item._itemType}}" donned="{{item._itemDonned}}" 
-                                category="{{item._weaponCategory}}" value="{{item._weaponDamageValue}}">
-                                <img src="http://media.blizzard.com/wow/icons/56/{{item._blizzItemIcon}}.jpg" height="100%" />
-                                <my-popover></my-popover>
-                            </span>
+                        <div class="container">
+                            <div class="col-md-1" *ngFor="let item of bagList" [dragula]='"another-bag"'>
+                                <span popup *ngIf="item._itemType == 'Gear'"
+                                    name="{{item._itemName}}" level="{{item._itemLevel}}" 
+                                    type="{{item._itemType}}" donned="{{item._itemDonned}}"
+                                    category="{{item._gearCategory}}"   value="{{item._gearDefenseValue}}">
+                                    <img src="http://media.blizzard.com/wow/icons/56/{{item._blizzItemIcon}}.jpg" height="100%" />
+                                    <my-popover></my-popover>
+                                </span>
+                                <span popup *ngIf="item._itemType == 'Weapon'" 
+                                    name="{{item._itemName}}" level="{{item._itemLevel}}" 
+                                    type="{{item._itemType}}" donned="{{item._itemDonned}}" 
+                                    category="{{item._weaponCategory}}" value="{{item._weaponDamageValue}}">
+                                    <img src="http://media.blizzard.com/wow/icons/56/{{item._blizzItemIcon}}.jpg" height="100%" />
+                                    <my-popover></my-popover>
+                                </span>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
                         
                     </div>
                </div>`,
-    directives: [NewItemComponent, Popup, PopoverComponent]
+
+    directives: [NewItemComponent, Popup, PopoverComponent, Dragula]
 })
 
 export class BagComponent implements OnInit {
 
-    private bagList:Item[];
+    public bagList:Item[];
 
     @Input()
     private hero:Hero;

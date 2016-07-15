@@ -10,21 +10,17 @@ import { HeroService }          from "../../services/hero.service";
                     <div class="row">
                         <div class="col-md-6 col-md-offset-3">
                             <h1>Heroes</h1>
-                            
                             <button class="btn btn-success btn-lg btn-block" (click)="addHero()">Add New Hero</button>
-                            
                             <div >
                                 <div >
                                     <ul class="list-group">
-                                        <a class="list-group-item" *ngFor="let hero of heroList"  [class.active]="hero === selectedHero" (click)="onSelect(hero)">
-                                            <h2><label class="label label-primary">{{hero._level}}</label> {{hero._name}}</h2>
+                                        <a class="list-group-item" role="button" *ngFor="let hero of heroList"  [class.active]="hero === selectedHero" (click)="onSelect(hero)">
+                                            <h2><label class="label label-primary cursor-pointer">{{hero._level}}</label> {{hero._name}}</h2>
                                         </a>
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                        
-                      
                     </div>
                 </div>
                 

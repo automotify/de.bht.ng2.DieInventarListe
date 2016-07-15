@@ -4,6 +4,7 @@ import {Hero} from "../../models/hero/hero.model";
 import {HeroService} from "../../services/hero.service";
 import {BagComponent} from "../item/bag.component";
 import {EquipmentComponent} from "./equipment.componnent";
+import {DragulaService} from "ng2-dragula/ng2-dragula";
 
 //noinspection JSAnnotator
 @Component({
@@ -38,13 +39,17 @@ import {EquipmentComponent} from "./equipment.componnent";
                         <heros-bag [hero]="hero"></heros-bag>
                         
                     </div>
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3" *ngIf="!hero" id="noherodetails">
+                            <h1>Hero not found!</h1>
+                            <button class="btn btn-success btn-block" (click)="goToHeroes()">Heroes</button>
+                        </div>
+                    </div>
                 </div>
                 
-                <div *ngIf="!hero" id="noherodetails">
-                    <h1>Hero not found!</h1>
-                    <button (click)="goToHeroes()">Heroes</button>
-                </div>
+                
                 `,
+    viewProviders: [DragulaService],
     directives: [BagComponent, EquipmentComponent]
 })
 
