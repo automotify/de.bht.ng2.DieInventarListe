@@ -3,6 +3,9 @@ import { ROUTER_DIRECTIVES }        from '@angular/router';
 
 import { HeroService }              from "./services/hero.service";
 import { ItemService }              from "./services/item.service";
+import {HeroesComponent}            from "./components/hero/heroes.component";
+import {DashboardComponent}         from "./components/dashboard.component";
+import {HeroDetailComponent}        from "./components/hero/hero-detail.component";
 
 @Component({
     selector: 'my-app',
@@ -29,7 +32,8 @@ import { ItemService }              from "./services/item.service";
     </footer>
   `,
     providers:  [HeroService, ItemService],
-    directives: [ROUTER_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES],
+    precompile: [DashboardComponent, HeroesComponent, HeroDetailComponent]
 })
 
 export class AppComponent{

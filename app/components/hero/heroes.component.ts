@@ -3,6 +3,7 @@ import { Router }               from "@angular/router"
 
 import { Hero }                 from "../../models/hero/hero.model";
 import { HeroService }          from "../../services/hero.service";
+import { HeroDetailComponent }  from "./hero-detail.component";
 
 @Component({
     template: `
@@ -26,7 +27,8 @@ import { HeroService }          from "../../services/hero.service";
                 
                 
     `,
-    providers: [HeroService]
+    providers: [HeroService],
+    precompile: [HeroDetailComponent]
 })
 
 export class HeroesComponent implements OnInit{

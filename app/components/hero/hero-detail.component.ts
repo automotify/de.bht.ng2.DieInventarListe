@@ -1,10 +1,10 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit}      from "@angular/core";
 import {Router, ActivatedRoute} from "@angular/router";
-import {Hero} from "../../models/hero/hero.model";
-import {HeroService} from "../../services/hero.service";
-import {BagComponent} from "../item/bag.component";
-import {EquipmentComponent} from "./equipment.componnent";
-import {DragulaService} from "ng2-dragula/ng2-dragula";
+import {Hero}                   from "../../models/hero/hero.model";
+import {HeroService}            from "../../services/hero.service";
+import {BagComponent}           from "../item/bag.component";
+import {EquipmentComponent}     from "./equipment.componnent";
+import {DragulaService}         from "ng2-dragula/ng2-dragula";
 
 //noinspection JSAnnotator
 @Component({
@@ -50,7 +50,8 @@ import {DragulaService} from "ng2-dragula/ng2-dragula";
                 
                 `,
     viewProviders: [DragulaService],
-    directives: [BagComponent, EquipmentComponent]
+    directives: [],
+    precompile: [BagComponent, EquipmentComponent]
 })
 
 export class HeroDetailComponent implements OnInit {
