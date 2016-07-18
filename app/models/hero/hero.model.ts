@@ -1,11 +1,11 @@
-import {Equipment} from "../item/equipment.model";
+import {Item} from "../item/item.model";
 
 export class Hero {
     public id      :number;
     public _name   :string;
     public _level  :number;
     public _bag    :number[];
-    public _equip  :Equipment;
+    public _equip  :number[];
     public _imgURL :string;
 
     /**
@@ -20,7 +20,7 @@ export class Hero {
         this._name   = name;
         this._level  = level;
         this._bag    = [];
-        this._equip  = new Equipment();
+        this._equip  = [];
         this._imgURL = imgURL
     }
 

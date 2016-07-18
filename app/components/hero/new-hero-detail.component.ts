@@ -38,11 +38,9 @@ import {HeroService} from "../../services/hero.service";
                             </div>
                         </div>
                     </div>
-                    <my-equipment [hero]="hero"></my-equipment>
-                    <heros-bag [hero]="hero"></heros-bag>
                 </div>
                 `,
-    directives: [EquipmentComponent, BagComponent]
+    directives: []
 })
 
 export class NewHeroDetailComponent implements OnInit {

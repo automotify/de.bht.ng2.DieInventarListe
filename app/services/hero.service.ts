@@ -16,8 +16,8 @@ export class HeroService {
     static save(hero: Hero): Promise<Hero> {
         hero.id = HEROES.length;
         HEROES.push(hero);   // new Hero
-        console.log("save : " + hero);
-        console.log("next free index is " + HEROES.length);
+        //console.log("save : " + hero);
+        //console.log("next free index is " + HEROES.length);
         return;
     }
 

@@ -64,7 +64,7 @@ export class ItemService {
                         //key words for item category
                         let subStringArray = ["helm", "helmet", "chest", "shoulder", "cape", "glove", "boot", "boots",
                             "pant", "belt", "wand", "axe", "staff", "sword", "mail", "bracer", "misc", "shield", "mace",
-                            "gauntlets", "ring", "shortblade", "shirt"];
+                            "gauntlets", "ring", "shortblade", "shirt", "hammer", "rifle", "knife"];
                         //5
                         for (var i = 0; i < subStringArray.length; i++) {
                             if (string.indexOf(subStringArray[i]) > -1)

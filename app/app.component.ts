@@ -6,6 +6,7 @@ import { ItemService }              from "./services/item.service";
 import {HeroesComponent}            from "./components/hero/heroes.component";
 import {DashboardComponent}         from "./components/dashboard.component";
 import {HeroDetailComponent}        from "./components/hero/hero-detail.component";
+import {NewHeroDetailComponent}     from "./components/hero/new-hero-detail.component";
 
 @Component({
     selector: 'my-app',
@@ -33,7 +34,7 @@ import {HeroDetailComponent}        from "./components/hero/hero-detail.componen
   `,
     providers:  [HeroService, ItemService],
     directives: [ROUTER_DIRECTIVES],
-    precompile: [DashboardComponent, HeroesComponent, HeroDetailComponent]
+    precompile: [DashboardComponent, HeroesComponent, HeroDetailComponent, NewHeroDetailComponent]
 })
 
 export class AppComponent{

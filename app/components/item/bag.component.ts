@@ -3,8 +3,7 @@
  *
  * @author Daniel Schleußner
  */
-import {getCanActivateHook} from "@angular/router-deprecated/esm/src/lifecycle/route_lifecycle_reflector";
-import {DragulaService, Dragula} from "ng2-dragula/ng2-dragula";
+import {Dragula}                    from "ng2-dragula/ng2-dragula";
 import {Component, Input, OnInit}   from "@angular/core";
 import {Router}                     from "@angular/router";
 import {Hero}                       from "../../models/hero/hero.model";

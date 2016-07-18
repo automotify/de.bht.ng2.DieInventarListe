@@ -2,9 +2,8 @@ import {Component, OnInit}      from "@angular/core";
 import {Router, ActivatedRoute} from "@angular/router";
 import {Hero}                   from "../../models/hero/hero.model";
 import {HeroService}            from "../../services/hero.service";
-import {BagComponent}           from "../item/bag.component";
-import {EquipmentComponent}     from "./equipment.componnent";
 import {DragulaService}         from "ng2-dragula/ng2-dragula";
+import {HeroInventoryComponent} from "../item/inventory.component";
 
 //noinspection JSAnnotator
 @Component({
@@ -35,8 +34,7 @@ import {DragulaService}         from "ng2-dragula/ng2-dragula";
                                 </ul>
                             </div>
                         </div>
-                        <my-equipment [hero]="hero"></my-equipment>
-                        <heros-bag [hero]="hero"></heros-bag>
+                        <hero-inventory [hero]="hero"></hero-inventory>
                         
                     </div>
                     <div class="row">
@@ -49,9 +47,9 @@ import {DragulaService}         from "ng2-dragula/ng2-dragula";
                 
                 
                 `,
-    viewProviders: [DragulaService],
-    directives: [],
-    precompile: [BagComponent, EquipmentComponent]
+    //viewProviders: [DragulaService],
+    directives: [HeroInventoryComponent],
+    precompile: [HeroInventoryComponent]
 })
 
 export class HeroDetailComponent implements OnInit {
