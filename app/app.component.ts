@@ -43,6 +43,6 @@ export class AppComponent{
 
     constructor() {
         this.title = "Die Inventarliste";
-        this.developers = "Andreas Burger | András Bucsi | Daniel Schleußner";
+        this.developers = "András Bucsi | Andreas Burger | Daniel Schleußner";
     }
 }

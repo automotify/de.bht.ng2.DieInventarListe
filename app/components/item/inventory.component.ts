@@ -2,7 +2,6 @@
  * Created by Phenax on 18.07.2016.
  */
 import {Component, Input, OnInit}   from "@angular/core";
-import {Router}                     from "@angular/router";
 import {Hero}                       from "../../models/hero/hero.model";
 import {Item}                       from "../../models/item/item.model";
 import {ItemService}                from "../../services/item.service";
@@ -27,12 +26,24 @@ import {DND_DIRECTIVES}             from 'ng2-dnd/ng2-dnd';
                                             (onDropSuccess)="addToEquipment($event)"
                                             [dropZones]="['boxers-zone']">
                                                 <div class="col-md-3 col-md-offset-3"
-                                                    *ngFor="let item of equipmentList; let i = index" 
+                                                    *ngFor="let item of hero._equip; let i = index" 
                                                     [dragData]="item" (onDropSuccess)="addToEquipment($event)"
                                                     dnd-sortable [sortableIndex]="i">
                                                    
-                                                    <span><img src="http://media.blizzard.com/wow/icons/56/{{item._blizzItemIcon}}.jpg" height="100%" /></span> 
-                                                      
+                                                    <span popup *ngIf="item._itemType == 'Gear'"
+                                                        name="{{item._itemName}}" level="{{item._itemLevel}}" 
+                                                        type="{{item._itemType}}" donned="{{item._itemDonned}}"
+                                                        category="{{item._gearCategory}}"   value="{{item._gearDefenseValue}}">
+                                                        <img src="http://media.blizzard.com/wow/icons/56/{{item._blizzItemIcon}}.jpg" height="100%" />
+                                                        <my-popover></my-popover>
+                                                    </span>
+                                                    <span popup *ngIf="item._itemType == 'Weapon'"
+                                                        name="{{item._itemName}}" level="{{item._itemLevel}}" 
+                                                        type="{{item._itemType}}" donned="{{item._itemDonned}}"
+                                                        category="{{item._weaponCategory}}"   value="{{item._weaponDamageValue}}">
+                                                        <img src="http://media.blizzard.com/wow/icons/56/{{item._blizzItemIcon}}.jpg" height="100%" />
+                                                        <my-popover></my-popover>
+                                                    </span>
                                                 </div>
                                         </div>
                                     </div>       
@@ -45,22 +56,23 @@ import {DND_DIRECTIVES}             from 'ng2-dnd/ng2-dnd';
                                     <div ><button class="btn btn-success btn-block" (click)="createANewItemModal()">Loot Item</button></div>
                                 </div>
                                 <div class="row" >
-                                    <div class="col-md-11" dnd-sortable-container [dropZones]="['boxers-zone']" [sortableData]="bagList">
-                                        <div class="col-md-2" *ngFor="let item of bagList; let i = index" 
-                                            dnd-sortable [sortableIndex]="i" [dragData]="item" (onDragSuccess)="itemDrag($event)">
-                                            <span popup *ngIf="item._itemType == 'Gear'"
+                                    <div class="col-md-11" dnd-sortable-container [dropZones]="['boxers-zone']" [sortableData]="bagList"
+                                    (onDropSuccess)="itemDrag($event)">
+                                        <div class="col-md-2" *ngFor="let item of hero._bag; let i = index" 
+                                            dnd-sortable [sortableIndex]="i" [dragData]="item" (onDropSuccess)="itemDrag($event)"
+                                            (onDragStart)="currentDrag($event)">
+                                            <!--(onDropSuccess)="dragItem($event)"-->
+                                            <span popup *ngIf="(item._itemType == 'Gear' && item._itemDonned == false)"
                                                 name="{{item._itemName}}" level="{{item._itemLevel}}" 
                                                 type="{{item._itemType}}" donned="{{item._itemDonned}}"
-                                                category="{{item._gearCategory}}"   value="{{item._gearDefenseValue}}"
-                                                [hidden]="item._itemDonned == true">
+                                                category="{{item._gearCategory}}"   value="{{item._gearDefenseValue}}">
                                                 <img src="http://media.blizzard.com/wow/icons/56/{{item._blizzItemIcon}}.jpg" height="100%" />
                                                 <my-popover></my-popover>
                                             </span>
-                                            <span popup *ngIf="item._itemType == 'Weapon'" 
+                                            <span popup *ngIf="(item._itemType == 'Weapon' && item._itemDonned == false)" 
                                                 name="{{item._itemName}}" level="{{item._itemLevel}}" 
                                                 type="{{item._itemType}}" donned="{{item._itemDonned}}" 
-                                                category="{{item._weaponCategory}}" value="{{item._weaponDamageValue}}"
-                                                [hidden]="item._itemDonned == true">
+                                                category="{{item._weaponCategory}}" value="{{item._weaponDamageValue}}">
                                                 <img src="http://media.blizzard.com/wow/icons/56/{{item._blizzItemIcon}}.jpg" height="100%" />
                                                 <my-popover></my-popover>
                                             </span>
@@ -82,125 +94,224 @@ export class HeroInventoryComponent implements OnInit {
 
     @Input() hero:Hero;
 
-    d0: Item; d1: Item; d2: Item; d3: Item; d4: Item; d5: Item;
+    equipmentList:Item[] = [];
+    bagList:Item[] = [];
 
-    equipmentList   :Item[] = [];
-    bagList         :Item[] = [];
-
-    private e : Boolean[] = [false, false, false, false, false, false];
     private style;
+    d0:Item;
+    d1:Item;
+    d2:Item;
+    d3:Item;
+    d4:Item;
+    d5:Item;
 
-    constructor(private router:Router, private itemService:ItemService) {}
+    currentItem:Item;
+
+    constructor(private itemService:ItemService) {
+        this.d0 = new Gear(0, "No Item", 0, 0, 0, "inv_helmet_leather_raiddruid_k_01", "Helmet", 0);
+        this.d1 = new Gear(1, "No Item", 0, 0, 0, "inv_shoulder_leather_raiddruid_k_01", "Shoulders", 0);
+        this.d2 = new Gear(2, "No Item", 0, 0, 0, "inv_chest_leather_raiddruid_k_01", "Chest", 0);
+        this.d3 = new Gear(3, "No Item", 0, 0, 0, "inv_glove_leather_raiddruid_k_01", "Glove", 0);
+        this.d4 = new Gear(4, "No Item", 0, 0, 0, "inv_pant_leather_raiddruid_k_01", "Boots", 0);
+        this.d5 = new Weapon(5, "No Item", 0, 0, 0, "inv_hammer_15", "Sword", 0);
+        this.d0._itemDonned = true;
+        this.d1._itemDonned = true;
+        this.d2._itemDonned = true;
+        this.d3._itemDonned = true;
+        this.d4._itemDonned = true;
+        this.d5._itemDonned = true;
+        this.equipmentList = [this.d0, this.d1, this.d2, this.d3, this.d4, this.d5];
+    }
 
     ngOnInit() {
-
-
-        this.getAllItemsFromHero();
-        this.d0 = new Gear(0, "No Item" , 0, this.hero.id, 0, "inv_helmet_leather_raiddruid_k_01", "Helmet", 0);
-        this.d1 = new Gear(1, "No Item" , 0, this.hero.id, 0, "inv_shoulder_leather_raiddruid_k_01", "Shoulders", 0);
-        this.d2 = new Gear(2, "No Item" , 0, this.hero.id, 0, "inv_chest_leather_raiddruid_k_01", "Chest", 0);
-        this.d3 = new Gear(3, "No Item" , 0, this.hero.id, 0, "inv_glove_leather_raiddruid_k_01", "Glove", 0);
-        this.d4 = new Gear(4, "No Item" , 0, this.hero.id, 0, "inv_pant_leather_raiddruid_k_01", "Boots", 0);
-        this.d5 = new Weapon(5, "No Item" , 0, this.hero.id, 0, "inv_hammer_15", "Sword", 0);
-        this.equipmentList = [this.d0, this.d1, this.d2, this.d3, this.d4, this.d5];
+        if (this.hero._equip.length <= 0) {
+            for (var i = 0; i < this.equipmentList.length; i++) {
+                this.equipmentList[i]._heroId = this.hero.id;
+            }
+            this.hero._equip = this.equipmentList;
+        }
 
         //hero as background
-        this.style = {'background-image': 'url(' + this.hero._imgURL + ')',
-            'background-size'       : '30%',
-            'background-repeat'     : 'no-repeat',
-            'background-position'   : 'center',
+        this.style = {
+            'background-image': 'url(' + this.hero._imgURL + ')',
+            'background-size': '30%',
+            'background-repeat': 'no-repeat',
+            'background-position': 'center',
         };
 
     }
-
-    /**
-     * call all items from this hero
-     */
-    private getAllItemsFromHero() {
-        this.itemService.getAllItemsFromHero(this.hero.id)
-            .then(items => {
-                this.bagList = items;
-                this.getEquipedItemsFromHero(this.bagList)
-            })
-    }
-
-    //ToDo: shift to the itemServe
-    private getEquipedItemsFromHero(bagList:Item[]) {
-        for(var i = 0; i < bagList.length; i++){
-            if(bagList[i]._itemDonned) {
-                if(bagList[i]._itemType == "Gear"){
-                    /*
-                     "helm", "helmet", "chest", "shoulder", "cape", "glove", "boot", "boots",
-                     "pant", "belt", "wand", "axe", "staff", "sword", "mail", "bracer", "misc", "shield", "mace",
-                     "gauntlets", "ring", "shortblade", "shirt"
-                     */
-                    var gearItem = bagList[i] as Gear;
-                    switch (gearItem._gearCategory){
-                        case "Helmet" || "Helm":
-                            this.equipmentList[0] = gearItem;
-                            this.e[0] = true;
-                            break;
-                        case "Shoulder" || "Cape" || "Misc":
-                            this.equipmentList[1] = gearItem;
-                            this.e[1] = true;
-                            break;
-                        case "Chest" || "Belt" || "Shirt":
-                            this.equipmentList[2] = gearItem;
-                            this.e[2] = true;
-                            break;
-                        case "Glove" || "Bracer" || "Gauntlets" || "Ring":
-                            this.equipmentList[3] = gearItem;
-                            this.e[3] = true;
-                            break;
-                        case "Boot" || "Boots" || "Pant":
-                            this.equipmentList[4] = gearItem;
-                            this.e[4] = true;
-                            break;
-                        default:
-                    }
-
-                } else {
-                    var weaponItem = bagList[i] as Weapon;
-                    this.equipmentList[5] = weaponItem;
-                    this.e[5] = true;
-                }
-            }
-        }
-
-    }
-
     /**
      * call the blizzard api to create an item for this hero
      */
     private createANewItemModal() {
         this.itemService.getBlizzData(this.hero.id).then(i=> {
             if (i != undefined) {
-                //console.log(i);
-                this.getAllItemsFromHero();
+                this.hero._bag.push(i);
             }
         });
     }
 
     /**
+     * get an item from hero´s bag and put this item in a category
+     * @param item
+     */
+    private setItemToHeroEquipment(item:Item) {
+        if (item._itemType == "Gear") {
+            /*
+             "helm", "helmet", "chest", "shoulder", "cape", "glove", "boot", "boots",
+             "pant", "belt", "wand", "axe", "staff", "sword", "mail", "bracer", "misc", "shield", "mace",
+             "gauntlets", "ring", "shortblade", "shirt"
+             */
+            var gearItem = item as Gear;
+            switch (gearItem._gearCategory) {
+                case "Helmet":
+                case "Helm":
+                    if(this.hero._equip[0]._itemName != "No Item"){
+                        this.hero._equip[0]._itemDonned = false;
+                        this.hero._bag.push(this.hero._equip[0]);
+                    }
+                    this.hero._equip[0] = gearItem;
+                    break;
+                case "Shoulder":
+                case "Cape":
+                case "Misc":
+                    if(this.hero._equip[1]._itemName != "No Item"){
+                        this.hero._equip[1]._itemDonned = false;
+                        this.hero._bag.push(this.hero._equip[1]);
+                    }
+                    this.hero._equip[1] = gearItem;
+                    break;
+                case "Chest":
+                case "Belt":
+                case "Shirt":
+                    if(this.hero._equip[2]._itemName != "No Item"){
+                        this.hero._equip[2]._itemDonned = false;
+                        this.hero._bag.push(this.hero._equip[2]);
+                    }
+                    this.hero._equip[2] = gearItem;
+                    break;
+                case "Glove":
+                case "Bracer":
+                case "Gauntlets":
+                case "Ring":
+                    if(this.hero._equip[3]._itemName != "No Item"){
+                        this.hero._equip[3]._itemDonned = false;
+                        this.hero._bag.push(this.hero._equip[3]);
+                    }
+                    this.hero._equip[3] = gearItem;
+                    break;
+                case "Boot":
+                case "Boots":
+                case "Pant":
+                case "Mail":
+                    if(this.hero._equip[4]._itemName != "No Item"){
+                        this.hero._equip[4]._itemDonned = false;
+                        this.hero._bag.push(this.hero._equip[4]);
+                    }
+                    this.hero._equip[4] = gearItem;
+                    break;
+                default:
+            }
+
+        } else {
+            var weaponItem = item as Weapon;
+            if(this.hero._equip[5]._itemName != "No Item"){
+                this.hero._equip[5]._itemDonned = false;
+                this.hero._bag.push(this.hero._equip[5]);
+            }
+            this.hero._equip[5] = weaponItem;
+        }
+    }
+
+    /**
+     * get an item which will be delete and set a dummy item
+     * @param item
+     */
+    private setDummyItem(item: Item){
+        if (item._itemType == "Gear") {
+            var gearItem = item as Gear;
+            switch (gearItem._gearCategory) {
+                case "Helmet":
+                case "Helm":
+                    this.hero._equip[0] = this.d0;
+                    break;
+                case "Shoulder":
+                case "Cape":
+                case "Misc":
+                    this.hero._equip[1] = this.d1;
+                    break;
+                case "Chest":
+                case "Belt":
+                case "Shirt":
+                    this.hero._equip[2] = this.d2;
+                    break;
+                case "Glove":
+                case "Bracer":
+                case "Gauntlets":
+                case "Ring":
+                    this.hero._equip[3] = this.d3;
+                    break;
+                case "Boot":
+                case "Boots":
+                case "Pant":
+                case "Mail":
+                    this.hero._equip[4] = this.d4;
+                    break;
+                default:
+            }
+
+        } else {
+            //var weaponItem = item as Weapon;
+            this.hero._equip[5] = this.d5;
+
+        }
+    }
+
+
+    /**
      * Drag an item from the equipmentList to the bagList
      * @param item
      */
-    private itemDrag(item: Item){
-        console.log("1" + item._itemName);
-        if(item._itemName != undefined) {
+    private itemDrag(item:Item) {
+        if(this.currentItem._itemDonned){
+            //console.log("1" + item._itemName);
             item._itemDonned = false;
-            this.getAllItemsFromHero();
+            this.hero._bag.push(item);
+            this.setDummyItem(item);
         }
+
     }
 
     /**
      * Drag an item from the bagList to the equipmentList
      * @param item
      */
-    private addToEquipment(item: Item){
-        console.log("2" + item._itemName);
-        item._itemDonned = true;
-        this.getAllItemsFromHero();
+    private addToEquipment(item:Item) {
+        if(!this.currentItem._itemDonned){
+            //console.log("2 " + item._itemName + " state: " + item._itemDonned);
+            item._itemDonned = true;
+            this.setItemToHeroEquipment(item);
+            let index:number = this.hero._bag.indexOf(item, 0);
+            if (index > -1) {
+                this.hero._bag.splice(index, 1)
+            }
+            if(this.hero._bag.length <= 0) {
+                this.createANewItemModal();
+            }
+        }
+
+
+    }
+
+    private currentDrag(item:Item) {
+        //console.log("current drag item " + item._itemDonned);
+        this.currentItem = item;
+    }
+
+    private loggingItems(items:Item[], nameOfTheList:string) {
+        for (var i = 0; i < items.length; i++) {
+            console.log(nameOfTheList + ": " + items[i].id + " name: " + items[i]._itemName);
+        }
     }
 
 }

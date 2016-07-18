@@ -25,7 +25,7 @@ export class ItemService {
      * @param max
      * @returns {any} a random number
      */
-    private randomIntFromInterval(min, max) {
+    public randomIntFromInterval(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
@@ -64,7 +64,7 @@ export class ItemService {
                         //key words for item category
                         let subStringArray = ["helm", "helmet", "chest", "shoulder", "cape", "glove", "boot", "boots",
                             "pant", "belt", "wand", "axe", "staff", "sword", "mail", "bracer", "misc", "shield", "mace",
-                            "gauntlets", "ring", "shortblade", "shirt", "hammer", "rifle", "knife"];
+                            "gauntlets", "ring", "shortblade", "shirt", "hammer", "rifle", "knife", "bow", "crossbow"];
                         //5
                         for (var i = 0; i < subStringArray.length; i++) {
                             if (string.indexOf(subStringArray[i]) > -1)
@@ -121,17 +121,17 @@ export class ItemService {
     }
 
     /**
-     * return one item
+     * return one item in an array
      * @param id
      * @returns {Promise<TResult>}
      */
-    getItem(id:number | string) {
+    getItem(id:number):Promise<Item> {
         return this.getAllItems()
             .then(items => items.filter(item => item.id === +id)[0]);
     }
 
     /**
-     * return all item from one hero
+     * return all items from one hero
      * @param id is the id from the hero
      * @returns {Promise<TResult>}
      */
@@ -141,6 +141,26 @@ export class ItemService {
             .then(h => hero = h);
         return this.getAllItems()
             .then(items => items.filter(item => item._heroId === hero.id));
+    }
+
+    /**
+     * return an item[]
+     * @param id
+     * @returns {Promise<TResult>}
+     */
+    getHeroesBag(id:number):Promise<Item[]> {
+        return this.getAllItemsFromHero(id)
+            .then(items => items.filter(item => item._itemDonned == false));
+    }
+
+    /**
+     * return an item[]
+     * @param id
+     * @returns {Promise<TResult>}
+     */
+    getHeroesEquipment(id:number):Promise<Item[]> {
+        return this.getAllItemsFromHero(id)
+            .then(items => items.filter(item => item._itemDonned == true));
     }
 
     /**
@@ -162,61 +182,6 @@ export class ItemService {
             //console.log("next free index is " + ITEMS.length);
         }
     }
-
-    //save Item
-    /*save(item: Item): Promise<Item>  {
-     item.id = this.itemId++;
-     if (item.id) {
-     return this.put(item);
-     }
-     return this.post(item);
-     }*/
-
-    //delete Item
-    /*delete(item: Item) {
-
-     let headers = new Headers();
-     headers.append('Content-Type', 'application/json');
-
-     let url = `${this.itemsUrl}/${item.id}`;
-
-     return this.http
-     .delete(url, headers)
-     .toPromise()
-     .catch(this.handleError);
-
-     }*/
-
-    // Add new Hero
-    /*private post(item: Item): Promise<Item> {
-
-     let headers = new Headers({
-     'Content-Type': 'application/json'});
-
-
-     return this.http
-     .post(this.itemsUrl, JSON.stringify(item), {headers: headers})
-     .toPromise()
-     .then(res => res.json().data)
-     .catch(this.handleError);
-
-     }*/
-
-    // Update existing Hero
-    /*private put(item: Item) {
-
-     let headers = new Headers();
-     headers.append('Content-Type', 'application/json');
-
-     let url = `${this.itemsUrl}/${item.id}`;
-
-     return this.http
-     .put(url, JSON.stringify(item), {headers: headers})
-     .toPromise()
-     .then(() => item)
-     .catch(this.handleError);
-
-     }*/
 
     private static handleError(error:any) {
         console.error('An error occurred', error);

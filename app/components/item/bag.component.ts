@@ -89,7 +89,7 @@ export class BagComponent implements OnInit {
      * call the blizzard api to create an item for this hero
      */
     private createANewItemModal() {
-        this.itemService.getBlizzData(this.hero.id).then(i=> {
+        this.itemService.getBlizzData(this.hero.id, this.itemService.randomIntFromInterval(1001, 150000)).then(i=> {
             if (i != undefined) {
                 //console.log(i);
                 this.getAllItemsFromHero();
